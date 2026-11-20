@@ -65,8 +65,13 @@ body {
 a { color: var(--color-link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 a:active { color: var(--color-link-pressed); }
+/* 行やカード全体がリンクのものは、押しても文字色を変えない（背景の変化だけで伝える） */
+a.result:active, a.h-row:active, a.h-sel:active, a.h-ghost:active, a.h-btn:active, a.h-float:active, .domain-menu .groups a:active, .logo:active { color: inherit; }
+.domain-menu .groups a.current:active { color: var(--color-link); }
 a, button, label, input { transition: background-color .1s ease, color .1s ease, border-color .1s ease; }
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--color-border-focused); outline-offset: 2px; }
+/* 検索結果は入力欄にフォーカスを残したまま背景で選択を示すので、枠は出さない */
+.result:focus, .result:focus-visible { outline: none; }
 button { font-family: inherit; cursor: pointer; }
 mark.hit { background: var(--color-background-warning); color: inherit; font-weight: 700; }
 
