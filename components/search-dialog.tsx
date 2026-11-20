@@ -7,6 +7,7 @@ import { loadSearchIndex, useSearch } from "@/lib/use-search";
 import { OPEN_SEARCH_EVENT } from "@/lib/search-events";
 import { announceOverlayOpen, trapTab, useCloseOnOtherOverlay } from "@/lib/overlay";
 import { Icon } from "./icon";
+import { DomainFilter } from "./domain-filter";
 import { SearchEmpty, SearchError, SearchResultList, rowId, toRows } from "./search-results";
 
 /** ⌘K で開く検索のポップアップ。レイアウトに1つだけ置く */
@@ -128,14 +129,7 @@ export function SearchDialog({ domains }: { domains: { slug: string; name: strin
             />
           </label>
           <div className="search-filters">
-            <select className="select h-input" value={domain} onChange={(e) => setDomain(e.target.value)} aria-label="領域で絞り込む">
-              <option value="">領域：すべて</option>
-              {domains.map((d) => (
-                <option key={d.slug} value={d.slug}>
-                  {d.name}
-                </option>
-              ))}
-            </select>
+            <DomainFilter domains={domains} value={domain} onChange={setDomain} />
             {term ? (
               <span className="search-count" aria-live="polite">
                 {loading ? "検索中" : `${count}件`}
