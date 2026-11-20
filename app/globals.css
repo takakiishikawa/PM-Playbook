@@ -365,6 +365,8 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 /* ---------- 検索の領域フィルター ---------- */
 .dfilter { position: relative; }
 .dfilter-btn { height: 28px; display: inline-flex; align-items: center; gap: 6px; padding: 0 6px 0 8px; border: 1px solid var(--color-border); border-radius: var(--radius-small); background: transparent; color: var(--color-text-subtle); font-size: 13px; line-height: 20px; }
+.dfilter-btn { max-width: 240px; }
+.dfilter-label { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .dfilter-btn.on { color: var(--color-text); border-color: var(--color-border-input); }
 .dfilter-btn[aria-expanded="true"] { background: var(--color-background-neutral); }
 .dfilter-menu.popup { overflow: auto; }

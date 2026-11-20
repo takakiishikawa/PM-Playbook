@@ -85,7 +85,7 @@ export function DomainFilter({ domains, value, onChange }: { domains: Option[]; 
         }}
       >
         {value ? <DomainIcon slug={value} color="currentColor" /> : <Icon glyph={FilterIcon} />}
-        <span className="dfilter-label">{current.name}</span>
+        <span className="dfilter-label" title={current.name}>{current.name}</span>
         <Icon glyph={ChevronDownIcon} />
       </button>
       {open ? (
