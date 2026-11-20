@@ -69,7 +69,7 @@ function toPlain(src: string): string {
 export function formatUpdated(u?: string): string | null {
   if (!u) return null;
   const m = /^(\d{4})-(\d{1,2})/.exec(u);
-  return m ? `${m[1]}年${Number(m[2])}月更新` : null;
+  return m ? `${m[1]}/${m[2].padStart(2, "0")}` : null;
 }
 
 /** 同じ領域の中での前後のノート（グループをまたいで続く） */

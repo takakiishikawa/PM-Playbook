@@ -3,7 +3,7 @@
 実践知への補助線。PM Schoolの講義内容を、原則・プロセス・テンプレートとして5〜10秒で引ける形にまとめた個人用プロダクト。
 
 ## 前提
-- 完全に個人用。他者への拡張は考えない。講義の内容を含むため、Supabase Auth（Google）と `ALLOWED_EMAILS` で閲覧者を限定している。図（`public/figures/`）も proxy で守っている。
+- 完全に個人用。他者への拡張は考えない。講義の内容を含むため、Supabase Auth（Google）と `ALLOWED_EMAILS` で閲覧者を限定している。図（`public/figures/`、WebP・横幅1600px以内）も proxy で守っている。図を差し替えるときはファイル名を変える（ブラウザに30日キャッシュさせているため）。
 - 中身は講義の内容だけ。講義にない情報は足さない。自分のメモ・技術の細部・PMP・PdM以外の分野は入れない。
 - 更新は年1回ほど、Claudeに頼んで行う。このリポジトリそのものが正。
 
@@ -14,7 +14,7 @@
 - `content/pages/*.html` … コンセプトとデザインシステムの本文（デザインで確定した静的HTML）。目次は id 付きの H2 から自動で作る（`lib/static-page.ts`）。
 - `components/mdx.tsx` … ノートで使える部品：`Mark` `Note` `Caution` `Cards` `Card` `Steps` `Step` `NoteLink` `TemplateLink` `Figure`。表は自動で横スクロールできる枠に入る。
 - `lib/content.ts`（ノートの読み込み・目次）、`lib/render-mdx.tsx`（MDXの描画）、`lib/search.ts`（検索）、`lib/auth.ts`・`lib/env.ts`（閲覧者の判定・環境変数）。
-- 検索は `/api/search`（タイトル・説明・本文の部分一致）。
+- 検索は、ビルド時に作る索引 `/api/search-index` をブラウザが1回読み込み、`lib/search-core.ts` で手元で照合する（タイトル・説明・本文の部分一致）。
 
 ## ノートの書き方（表記ルール）
 - 「だ・である」か体言止め。「です・ます」は使わない。

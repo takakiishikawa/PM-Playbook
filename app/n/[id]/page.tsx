@@ -44,17 +44,19 @@ export default async function NotePage({ params }: Params) {
       <main className="page with-toc" id="main">
         <article className="main article" id="note-body">
           <div className="title-block">
-            <h1 className="h1">{title}</h1>
-            {lede ? <p className="lede">{lede}</p> : null}
-            <div className="meta">
-              <span className="stage">{stage}</span>
-              {updated ? (
-                <span className="meta-item">
-                  <Icon glyph={ClockIcon} />
-                  {updated}
-                </span>
-              ) : null}
+            <div className="note-title-row">
+              <h1 className="h1">{title}</h1>
+              <div className="meta">
+                <span className="stage">{stage}</span>
+                {updated ? (
+                  <span className="meta-item" title={`最終更新 ${updated}`}>
+                    <Icon glyph={ClockIcon} />
+                    {updated}
+                  </span>
+                ) : null}
+              </div>
             </div>
+            {lede ? <p className="lede">{lede}</p> : null}
           </div>
           {content ?? (
             <Note title="準備中">
