@@ -31,7 +31,8 @@ export default async function NotePage({ params }: Params) {
   const doc = loadNote(note.id);
   const { prev, next } = neighbors(note);
   const d = note.domain;
-  const stage = d.ordered ? `STEP ${note.groupIndex + 1}　${note.groupName}` : note.groupName;
+  // 順番のある領域では、パンくずのグループ名に STEP の番号を添える
+  const groupLabel = d.ordered ? `STEP ${note.groupIndex + 1}　${note.groupName}` : note.groupName;
   const title = doc?.meta.title || note.title;
   const lede = doc?.meta.lede || note.desc;
   const updated = formatUpdated(doc?.meta.updated);
@@ -40,22 +41,11 @@ export default async function NotePage({ params }: Params) {
 
   return (
     <>
-      <Header crumbs={[{ label: d.name, href: `/d/${d.slug}` }, { label: note.groupName }]} currentDomain={d.slug} currentNote={note.id} />
+      <Header crumbs={[{ label: d.name, href: `/d/${d.slug}` }, { label: groupLabel }]} currentDomain={d.slug} currentNote={note.id} />
       <main className="page with-toc" id="main">
         <article className="main article" id="note-body">
           <div className="title-block">
-            <div className="note-title-row">
-              <h1 className="h1">{title}</h1>
-              <div className="meta">
-                <span className="stage">{stage}</span>
-                {updated ? (
-                  <span className="meta-item" title={`最終更新 ${updated}`}>
-                    <Icon glyph={ClockIcon} />
-                    {updated}
-                  </span>
-                ) : null}
-              </div>
-            </div>
+            <h1 className="h1">{title}</h1>
             {lede ? <p className="lede">{lede}</p> : null}
           </div>
           {content ?? (
@@ -63,6 +53,12 @@ export default async function NotePage({ params }: Params) {
               <p>このノートはまだ講義の内容から書き起こしていない。</p>
             </Note>
           )}
+          {updated ? (
+            <p className="note-updated">
+              <Icon glyph={ClockIcon} />
+              最終更新 {updated}
+            </p>
+          ) : null}
           <PrevNext prev={prev && { id: prev.id, title: prev.title }} next={next && { id: next.id, title: next.title }} />
         </article>
         {doc ? <Toc items={doc.headings} /> : null}
