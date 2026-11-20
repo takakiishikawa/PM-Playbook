@@ -1,7 +1,7 @@
 import BookWithBookmarkIcon from "@atlaskit/icon/core/book-with-bookmark";
 import BriefcaseIcon from "@atlaskit/icon/core/briefcase";
 import RoadmapIcon from "@atlaskit/icon/core/roadmap";
-import DiscoveryIcon from "@atlaskit/icon/core/discovery";
+import CompassIcon from "@atlaskit/icon/core/compass";
 import LightbulbIcon from "@atlaskit/icon/core/lightbulb";
 import ToolsIcon from "@atlaskit/icon/core/tools";
 import ChartBarIcon from "@atlaskit/icon/core/chart-bar";
@@ -15,7 +15,7 @@ const DOMAIN_GLYPHS: Record<string, Glyph> = {
   foundation: BookWithBookmarkIcon,
   bizdev: BriefcaseIcon,
   strategy: RoadmapIcon,
-  discovery: DiscoveryIcon,
+  discovery: CompassIcon,
   solution: LightbulbIcon,
   build: ToolsIcon,
   analytics: ChartBarIcon,

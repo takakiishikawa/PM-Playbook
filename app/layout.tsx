@@ -4,7 +4,7 @@ import { DOMAINS } from "@/content/structure";
 import { SearchDialog } from "@/components/search-dialog";
 import "./globals.css";
 
-const noto = Noto_Sans_JP({ weight: ["400", "500", "700"], subsets: ["latin"], variable: "--font-noto", display: "swap", preload: false });
+const noto = Noto_Sans_JP({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-noto", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   title: { default: "PM Playbook", template: "%s ｜ PM Playbook" },

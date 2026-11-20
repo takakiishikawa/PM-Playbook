@@ -26,7 +26,6 @@ export default function Home() {
             <div className="list-box">
               {DOMAINS.map((d) => (
                 <Link key={d.slug} href={`/d/${d.slug}`} className="domain-row h-row">
-                  <span className="no">{d.no}</span>
                   <DomainIcon slug={d.slug} />
                   <span className="text">
                     <span className="name">{d.name}</span>

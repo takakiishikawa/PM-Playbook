@@ -68,8 +68,7 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
                   onFocus={() => setActive(x.slug)}
                   onClick={() => setActive(x.slug)}
                 >
-                  <span className="no">{x.no}</span>
-                  <DomainIcon slug={x.slug} color={x.slug === active ? "var(--color-link)" : undefined} />
+                  <DomainIcon slug={x.slug} color={x.slug === active ? "var(--color-text)" : undefined} />
                   <span className="name">{x.name}</span>
                   <span className="count">{x.count}</span>
                 </button>
