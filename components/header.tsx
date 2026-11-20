@@ -14,6 +14,7 @@ const MENU: MenuDomain[] = DOMAINS.map((d) => ({
   slug: d.slug,
   name: d.name,
   count: noteCount(d),
+  ordered: d.ordered,
   groups: d.groups.map((g) => ({ name: g.name, notes: g.notes.map((n) => ({ id: n.id, title: n.title })) })),
 }));
 
@@ -38,7 +39,15 @@ export function Header({ crumbs, showSearch = true, currentDomain, currentNote }
                 </li>
                 {crumbs.map((c, i) => (
                   <li key={`${i}:${c.label}`} title={c.label}>
-                    {c.href ? <Link href={c.href}>{c.label}</Link> : <span className="current" aria-current="page">{c.label}</span>}
+                    {c.href ? (
+                      <Link href={c.href} className="crumb-link h-ghost">
+                        {c.label}
+                      </Link>
+                    ) : (
+                      <span className="current" aria-current="page">
+                        {c.label}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ol>

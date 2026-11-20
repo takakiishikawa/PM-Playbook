@@ -14,6 +14,8 @@ export type MenuDomain = {
   slug: string;
   name: string;
   count: number;
+  /** 順番のある領域（課題探索など）だけ、グループに番号を付ける。領域ページの STEP 表示と合わせる */
+  ordered?: boolean;
   groups: { name: string; notes: { id: string; title: string }[] }[];
 };
 
@@ -87,7 +89,8 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
                 {d.groups.map((g, gi) => (
                   <section key={g.name}>
                     <h3 className="section-label">
-                      {gi + 1}　{g.name}
+                      {d.ordered ? `${gi + 1}　` : ""}
+                      {g.name}
                     </h3>
                     {g.notes.map((n) => (
                       <Link key={n.id} href={`/n/${n.id}`} onClick={close} className={n.id === currentNote ? "current" : undefined} aria-current={n.id === currentNote ? "page" : undefined}>
