@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import ChevronDownIcon from "@atlaskit/icon/core/chevron-down";
+import ArrowRightIcon from "@atlaskit/icon/core/arrow-right";
 import { announceOverlayOpen, trapTab, useCloseOnOtherOverlay, useEscape } from "@/lib/overlay";
 import { Icon } from "./icon";
 import { DomainIcon } from "./domain-icon";
@@ -77,8 +78,9 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
             <div className="panel">
               <div className="panel-head">
                 <span className="panel-title">{d.name}</span>
-                <Link href={`/d/${d.slug}`} onClick={close}>
+                <Link href={`/d/${d.slug}`} onClick={close} className="icon-link">
                   領域ページを開く
+                  <Icon glyph={ArrowRightIcon} />
                 </Link>
               </div>
               <div className="groups">

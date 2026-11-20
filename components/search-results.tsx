@@ -82,7 +82,8 @@ export function SearchEmpty({ term, related, onPick }: { term: string; related: 
         <div className="related">
           <span className="l">近いノート</span>
           {related.map((r) => (
-            <Link key={r.id} href={`/n/${r.id}`} onClick={onPick}>
+            <Link key={r.id} href={`/n/${r.id}`} onClick={onPick} className="icon-link">
+              <Icon glyph={PageIcon} />
               {r.title}
             </Link>
           ))}
