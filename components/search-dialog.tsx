@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import SearchIcon from "@atlaskit/icon/core/search";
-import { useSearch } from "@/lib/use-search";
+import { loadSearchIndex, useSearch } from "@/lib/use-search";
 import { OPEN_SEARCH_EVENT } from "@/lib/search-events";
 import { announceOverlayOpen, trapTab, useCloseOnOtherOverlay } from "@/lib/overlay";
 import { Icon } from "./icon";
@@ -35,6 +35,17 @@ export function SearchDialog({ domains }: { domains: { slug: string; name: strin
   }, []);
 
   useCloseOnOtherOverlay("search", open, close);
+
+  // 開く前に、手が空いたときに索引を読んでおく（開いた瞬間から結果を出せるように）
+  useEffect(() => {
+    const warm = () => void loadSearchIndex().catch(() => {});
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(warm, { timeout: 3000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = setTimeout(warm, 1500);
+    return () => clearTimeout(t);
+  }, []);
   useEffect(() => setOpen(false), [pathname]);
 
   useEffect(() => {

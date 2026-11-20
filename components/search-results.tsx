@@ -5,7 +5,7 @@ import PageIcon from "@atlaskit/icon/core/page";
 import FileIcon from "@atlaskit/icon/core/file";
 import SearchIcon from "@atlaskit/icon/core/search";
 import WarningIcon from "@atlaskit/icon/core/warning";
-import type { SearchResult, Snippet } from "@/lib/search";
+import type { SearchResult, Snippet } from "@/lib/search-core";
 import { Icon, type Glyph } from "./icon";
 
 /** 検索結果の1行（ノートとテンプレートを同じ形にそろえる） */
