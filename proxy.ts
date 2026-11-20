@@ -28,9 +28,11 @@ export async function proxy(request: NextRequest) {
     },
   });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // getUser() は毎回 Supabase に問い合わせるため遅い。getClaims() は署名鍵（JWKS）で手元で検証するので、
+  // 非対称鍵のプロジェクトならネットワークを使わずに済む（対称鍵のときは getUser() と同じく問い合わせる）
+  const { data } = await supabase.auth.getClaims();
+  const email = typeof data?.claims.email === "string" ? data.claims.email : undefined;
+  const user = data?.claims.sub ? { email } : null;
 
   if (isPublicPath(pathname) || isAllowedEmail(user?.email)) return response;
 
