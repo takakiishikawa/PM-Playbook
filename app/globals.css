@@ -72,6 +72,8 @@ a, button, label, input { transition: background-color .1s ease, color .1s ease,
 a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--color-border-focused); outline-offset: 2px; }
 /* 検索結果は入力欄にフォーカスを残したまま背景で選択を示すので、枠は出さない */
 .result:focus, .result:focus-visible { outline: none; }
+/* マウスを動かすと選択が移るので、選択していない行にホバーの背景は付けない（2行が同時に灰色になるのを防ぐ） */
+.result.h-row:hover { background: transparent !important; }
 button { font-family: inherit; cursor: pointer; }
 mark.hit { background: var(--color-background-warning); color: inherit; font-weight: 700; }
 

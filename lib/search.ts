@@ -26,9 +26,6 @@ type Entry = {
 export const MAX_QUERY_LENGTH = 100;
 /** スニペットで一致箇所の前後に出す文字数 */
 const SNIPPET_WIDTH = 36;
-/** 並び順の重み。タイトル一致 → 説明一致 → 本文だけの一致 */
-const SCORE_TITLE = 100;
-const SCORE_DESC = 10;
 /** 「近いノート」に出す最低の類似度（検索語の2文字の組のうち一致した割合）と件数 */
 const RELATED_MIN_SCORE = 0.5;
 const RELATED_MAX = 3;
@@ -105,7 +102,7 @@ function related(q: string, entries: Entry[]) {
 
 /**
  * タイトル・説明・本文の部分一致で探す。空白で区切った語はすべて含むもの（AND）だけを返す。
- * 並びはタイトル一致 → 説明一致 → 本文一致の順。
+ * 並びは、タイトルに語を含むノートを先に、残りは領域の順（構成の並び順）。
  */
 export function search(rawQ: string, domain?: string): SearchResult {
   const q = rawQ.slice(0, MAX_QUERY_LENGTH);
@@ -113,18 +110,15 @@ export function search(rawQ: string, domain?: string): SearchResult {
   if (terms.length === 0) return { notes: [], templates: [], related: [] };
   const entries = getIndex().filter((e) => !domain || e.domain === domain);
 
-  const scored: { hit: NoteHit; score: number }[] = [];
+  const titleHits: NoteHit[] = [];
+  const otherHits: NoteHit[] = [];
   for (const e of entries) {
     const all = `${e.nTitle}\n${e.nBody}`;
     if (!terms.every((t) => all.includes(t))) continue;
-    const inTitle = terms.some((t) => e.nTitle.includes(t));
-    const inDesc = terms.some((t) => e.nDesc.includes(t));
-    scored.push({
-      hit: { id: e.id, title: e.title, path: e.path, snippet: snippetOf(e.body, e.nBody, terms) },
-      score: (inTitle ? SCORE_TITLE : 0) + (inDesc ? SCORE_DESC : 0),
-    });
+    const hit = { id: e.id, title: e.title, path: e.path, snippet: snippetOf(e.body, e.nBody, terms) };
+    // entries は構成の並び順なので、振り分けるだけで領域の昇順になる
+    (terms.some((t) => e.nTitle.includes(t)) ? titleHits : otherHits).push(hit);
   }
-  scored.sort((a, b) => b.score - a.score);
 
   const templates: TemplateHit[] = domain
     ? []
@@ -134,6 +128,6 @@ export function search(rawQ: string, domain?: string): SearchResult {
         snippet: snippetOf(t.desc.normalize("NFKC"), normalize(t.desc), terms),
       }));
 
-  const notes = scored.map((s) => s.hit);
+  const notes = [...titleHits, ...otherHits];
   return { notes, templates, related: notes.length + templates.length === 0 ? related(q, entries) : [] };
 }
