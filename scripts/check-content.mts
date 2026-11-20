@@ -60,6 +60,8 @@ for (const t of TEMPLATES) {
 
 for (const f of files.sort()) {
   const raw = fs.readFileSync(path.join(NOTES_DIR, f), "utf8");
+  // 一括置換などで文字が壊れていないか（UTF-8 として読めない部分は U+FFFD になる）
+  if (raw.includes("\uFFFD")) error(f, "UTF-8 として読めない文字がある（置換で文字が壊れた可能性）");
   const { data, content } = matter(raw);
   for (const key of ["title", "lede", "updated"]) if (!data[key]) error(f, `frontmatter に ${key} がない`);
 
