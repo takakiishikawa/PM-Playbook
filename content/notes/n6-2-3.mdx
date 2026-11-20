@@ -20,15 +20,19 @@ updated: 2026-11
 | ARPU | 1ユーザーあたりの平均収益。総収益 ÷ ユーザー数 |
 | Retention率／Churn率 | 既存顧客からの収益の継続性。継続した割合と解約した割合 |
 
+<Figure src="/figures/n6-2-3-1873.webp" alt="ストック売上を示す指標。SaaSの売上を月ごとの積み上げ棒グラフで示し、月ごとに得られる収益をMRR、年ごとに得られる収益をARRと呼ぶ" caption="MRRとARR：積み上がるストック売上" />
+
+<Figure src="/figures/n6-2-3-1875.webp" alt="New MRR。SaaS売上の棒グラフのうち、新規顧客から得られる月額収益の部分を強調している" caption="New MRR：新規顧客から得る月額収益" />
+
+<Figure src="/figures/n6-2-3-1878.webp" alt="Churn MRR。解約が発生することで、前月から失う収益の部分を棒グラフで示している" caption="Churn MRR：解約で失う月額収益" />
+
 ストック売上 =（新規顧客数 + 既存顧客数）× 1ユーザーあたりの平均収益。MRRを上げるには、このどれかを上げる。サブスクリプションは既存顧客から継続的に収益が得られるので、右肩上がりに成長しやすい。
 
 ## MRRの変化から仮説を立てる
 
-| MRRが下がった。考えられる要因 | 確かめる指標 |
-| --- | --- |
-| 新規顧客の獲得が減っている | New MRR |
-| 既存顧客が解約している | Churn率 |
-| プランの変更やダウングレードが多い | ARPU |
+主要な指標の変化から要因の仮説を立て、それを確かめる指標を決めて計測する。MRRが下がったなら、新規顧客の獲得が減っているのか（New MRR）、既存顧客が解約しているのか（Churn率）、プランの変更やダウングレードが多いのか（ARPU）を見る。
+
+<Figure src="/figures/n6-2-3-1880.webp" alt="KPIモニタリングによる仮説立て。MRRが低下したとき、新規顧客の獲得が減っている→New MRR、既存顧客が解約している→Churn Rate、プランの変更やダウングレードが多い→ARPU、と要因の仮説ごとに確かめる指標へ枝分かれするツリー" caption="MRRが下がったら、要因ごとに指標を確かめる" />
 
 ## 成長と効率を示す指標
 
@@ -38,7 +42,19 @@ updated: 2026-11
 | Revenue Retention率 | 前月からの収益がどれだけ継続しているか |
 | Net Revenue Retention率 | エクスパンション（アップグレードなどによる既存顧客からの収益増）とコントラクション（ダウングレードなどによる収益減）を考慮したRevenue Retention率 |
 
+<Figure src="/figures/n6-2-3-1883.webp" alt="ビジネスの成長度合いを示すNet New MRR。月ごとの棒グラフで、New MRRからChurn MRRを引いた差が成長分になる。Net New MRR = New MRR − Churn MRR = 当月MRR − 前月MRR" caption="Net New MRR = New MRR − Churn MRR" />
+
+<Figure src="/figures/n6-2-3-1889.webp" alt="Revenue Retention率。Churnがほとんど発生しない場合は前月の収益がほぼ継続し、Churnが多い場合は前月の収益の多くを失う、の比較グラフ" caption="Revenue Retention率：前月の収益がどれだけ続いているか" />
+
+<Figure src="/figures/n6-2-3-1893.webp" alt="エクスパンションとコントラクション。プランのアップグレードなどで既存顧客からの収益が増えるのがエクスパンション、ダウングレードなどで減るのがコントラクション" caption="エクスパンションとコントラクション" />
+
+<Figure src="/figures/n6-2-3-1894.webp" alt="Net Revenue Retention率。エクスパンションやコントラクションを考慮すると、Revenue Retention率は125%にも57%にもなる、の比較グラフ" caption="Net Revenue Retention率：増減を含めた継続率" />
+
 <Caution>MRRやNet New MRRが同じ推移でも、解約がほとんどない場合と多い場合では効率が違う。Revenue Retention率が低いと、相対的に高コストな新規獲得でMRRを伸ばすことになり、効率の悪いビジネスになる。</Caution>
+
+<Figure src="/figures/n6-2-3-1882.webp" alt="このようなケースをどう評価するか。Churnが生じてMRRが横ばいのケースと、Churnが生じても新規で伸ばしているケースを、月ごとの棒グラフで比べる" caption="Churnがあると、新規の獲得分が打ち消される" />
+
+<Figure src="/figures/n6-2-3-1885.webp" alt="MRRとNet New MRRが同じ推移の2つのケース。Churnがほとんど発生しない上のケースのほうが、新規獲得に頼らず効率的に成長している" caption="同じ成長でも、解約が少ないほうが効率的" />
 
 ## リテンションの先行指標
 
@@ -46,6 +62,10 @@ updated: 2026-11
 | --- | --- | --- |
 | 先行指標 | 将来の結果に影響しうる現在の活動やトレンド | 行動（DAU/MAU）、満足度（NPS） |
 | 遅行指標 | 過去の結果。成果を評価するのに使う | リテンション率 |
+
+<Figure src="/figures/n6-2-3-1897.webp" alt="先行指標と遅行指標。行動（DAU/MAU）や満足度（NPS）といった先行指標が、遅行指標のリテンション率に影響する" caption="先行指標（DAU/MAU・NPS）が、リテンション率を左右する" />
+
+<Figure src="/figures/n6-2-3-1901.webp" alt="先行指標のモニタリングと介入による改善。セグメントA・Bごとに先行指標をモニタリングし、悪化傾向が見られたセグメントに改善・介入することで、遅行指標のリテンション率を守る" caption="セグメントごとに先行指標を見て、悪化したら介入する" />
 
 ### DAU/MAU
 
