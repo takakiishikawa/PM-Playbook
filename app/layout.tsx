@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import { DOMAINS } from "@/content/structure";
 import { SearchDialog } from "@/components/search-dialog";
 import "./globals.css";
@@ -20,7 +19,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">本文へ移動</a>
         {children}
         <SearchDialog domains={DOMAINS.map((d) => ({ slug: d.slug, name: d.name }))} />
-        <Analytics />
       </body>
     </html>
   );
