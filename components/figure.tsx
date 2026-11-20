@@ -12,7 +12,7 @@ export function Figure({ src, alt, caption }: { src: string; alt: string; captio
     <figure className={big ? "figure big" : "figure"}>
       <div className="frame">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt} />
+        <img src={src} alt={alt} loading="lazy" decoding="async" />
         <button type="button" className="toggle h-float" onClick={() => setBig((v) => !v)} aria-label={big ? "図を縮小" : "図を拡大"} aria-expanded={big}>
           <Icon glyph={big ? ShrinkDiagonalIcon : GrowDiagonalIcon} />
           {big ? "縮小" : "拡大"}
