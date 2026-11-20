@@ -354,4 +354,4 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .tpl-cell { display: flex; align-items: flex-start; gap: 10px; }
 .tpl-cell > .icon { padding-top: 2px; }
 .crumbs .crumb-home { flex-shrink: 0; }
-.crumbs .crumb-home a { color: var(--color-text-subtle); }
+.crumbs .crumb-home a { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: var(--radius-small); color: var(--color-text-subtle); overflow: visible; }

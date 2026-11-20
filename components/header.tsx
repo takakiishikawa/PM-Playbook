@@ -32,9 +32,8 @@ export function Header({ crumbs, showSearch = true, currentDomain, currentNote }
             <nav aria-label="パンくず" className="crumbs-nav">
               <ol className="crumbs">
                 <li className="crumb-home">
-                  <Link href="/" className="icon-link">
+                  <Link href="/" className="crumb-home-link h-ghost" aria-label="ホーム" title="ホーム">
                     <Icon glyph={HomeIcon} />
-                    ホーム
                   </Link>
                 </li>
                 {crumbs.map((c, i) => (
