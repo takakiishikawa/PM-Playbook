@@ -98,7 +98,7 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
   background: var(--elevation-surface);
   border-bottom: 1px solid var(--color-border);
 }
-.header-left { flex: 1 1 0; min-width: 0; display: flex; align-items: center; gap: 8px; }
+.header-left { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 8px; }
 .logo { display: flex; align-items: center; gap: 8px; color: var(--color-text); flex: 0 0 auto; }
 .logo:hover { text-decoration: none; }
 .logo-mark { width: 24px; height: 24px; border-radius: 6px; background: var(--color-background-brand-bold); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
@@ -115,10 +115,10 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .crumbs a { color: var(--color-text-subtle); }
 .crumbs .current { color: var(--color-text); font-weight: 500; }
 .crumbs-divider { width: 1px; height: 20px; background: var(--color-border); margin: 0 4px; flex: 0 0 auto; }
-.search-trigger { flex: 0 1 360px; height: 32px; display: flex; align-items: center; gap: 8px; padding: 0 8px 0 10px; border: 1px solid var(--color-border-input); border-radius: var(--radius-medium); background: var(--elevation-surface); color: var(--color-text-subtlest); font-size: 14px; text-align: left; }
+.search-trigger { flex: 0 1 260px; margin-left: 16px; height: 32px; display: flex; align-items: center; gap: 8px; padding: 0 8px 0 10px; border: 1px solid var(--color-border-input); border-radius: var(--radius-medium); background: var(--elevation-surface); color: var(--color-text-subtlest); font-size: 14px; text-align: left; }
 .search-label { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .kbd { font-size: 12px; line-height: 16px; color: var(--color-text-subtle); background: var(--color-background-neutral); border-radius: var(--radius-xsmall); padding: 1px 6px; }
-.header-right { display: flex; align-items: center; justify-content: flex-end; gap: 2px; flex: 1 1 0; padding-left: 8px; }
+.header-right { display: flex; align-items: center; justify-content: flex-end; gap: 2px; flex: 0 0 auto; padding-left: 8px; }
 .icon-btn { width: 32px; height: 32px; border-radius: var(--radius-small); display: flex; align-items: center; justify-content: center; color: var(--color-text-subtle); border: none; background: transparent; }
 
 /* ---------- overlay (menu / search) ---------- */
