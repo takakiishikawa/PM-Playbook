@@ -374,3 +374,7 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .dfilter-icon { display: flex; }
 .dfilter-name { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .search-dialog.popup { overflow: visible; }
+/* 検索欄の消去ボタン（ブラウザ標準の × は隠し、hover・press のある独自ボタンにする） */
+.search-dialog .field input::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; display: none; }
+.clear-btn { width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: -4px; border: none; border-radius: var(--radius-small); background: transparent; color: var(--color-text-subtlest); }
+.clear-btn:hover { color: var(--color-text-subtle); }

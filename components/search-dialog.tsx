@@ -3,6 +3,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import SearchIcon from "@atlaskit/icon/core/search";
+import CrossCircleIcon from "@atlaskit/icon/core/cross-circle";
 import { loadSearchIndex, useSearch } from "@/lib/use-search";
 import { OPEN_SEARCH_EVENT } from "@/lib/search-events";
 import { announceOverlayOpen, trapTab, useCloseOnOtherOverlay } from "@/lib/overlay";
@@ -127,6 +128,20 @@ export function SearchDialog({ domains }: { domains: { slug: string; name: strin
               autoComplete="off"
               spellCheck={false}
             />
+            {q ? (
+              <button
+                type="button"
+                className="clear-btn h-ghost"
+                aria-label="入力を消す"
+                title="入力を消す"
+                onClick={() => {
+                  setQ("");
+                  inputRef.current?.focus();
+                }}
+              >
+                <Icon glyph={CrossCircleIcon} />
+              </button>
+            ) : null}
           </label>
           <div className="search-filters">
             <DomainFilter domains={domains} value={domain} onChange={setDomain} />
