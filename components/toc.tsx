@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import ListBulletedIcon from "@atlaskit/icon/core/list-bulleted";
+import { Icon } from "./icon";
 
 export type TocItem = { id: string; text: string; level: 2 | 3 };
 
@@ -33,7 +35,10 @@ export function Toc({ items }: { items: TocItem[] }) {
   if (items.filter((i) => i.level === 2).length < MIN_H2_FOR_TOC) return null;
   return (
     <nav className="toc" aria-label="このページの目次">
-      <span className="toc-title">目次</span>
+      <span className="toc-title">
+        <Icon glyph={ListBulletedIcon} />
+        目次
+      </span>
       {items.map((i) => (
         <a key={i.id} href={`#${i.id}`} className={`${i.level === 3 ? "lv3" : ""} ${active === i.id ? "active" : "h-toc"}`}>
           {i.text}

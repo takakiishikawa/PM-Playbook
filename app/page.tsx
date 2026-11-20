@@ -4,6 +4,7 @@ import { ALL_NOTES, DOMAINS, noteCount } from "@/content/structure";
 import { Header } from "@/components/header";
 import { Icon } from "@/components/icon";
 import { HomeSearch } from "@/components/search-trigger";
+import { DomainIcon } from "@/components/domain-icon";
 
 export default function Home() {
   return (
@@ -14,7 +15,6 @@ export default function Home() {
           <section className="stack-12">
             <h1 className="home-title">何を調べますか？</h1>
             <HomeSearch />
-            <p className="note-sm">ノートのタイトルと本文から探せます。⌘K で、どの画面からでも開けます。</p>
           </section>
           <section className="stack-8">
             <div className="section-head">
@@ -27,6 +27,7 @@ export default function Home() {
               {DOMAINS.map((d) => (
                 <Link key={d.slug} href={`/d/${d.slug}`} className="domain-row h-row">
                   <span className="no">{d.no}</span>
+                  <DomainIcon slug={d.slug} />
                   <span className="text">
                     <span className="name">{d.name}</span>
                     <span className="items">{d.groups.map((g) => g.name).join("・")}</span>

@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { DOMAINS, findDomain, noteCount } from "@/content/structure";
 import { hasNote } from "@/lib/content";
+import PageIcon from "@atlaskit/icon/core/page";
 import { Header } from "@/components/header";
+import { Icon } from "@/components/icon";
+import { DomainIcon } from "@/components/domain-icon";
 
 export function generateStaticParams() {
   return DOMAINS.map((d) => ({ domain: d.slug }));
@@ -24,6 +27,7 @@ export default async function DomainPage({ params }: { params: Promise<{ domain:
         <div className="wrap-1040 stack-32">
           <div className="page-head">
             <div className="title-row">
+              <span className="title-icon"><DomainIcon slug={d.slug} /></span>
               <h1 className="h1">{d.name}</h1>
               <span className="lozenge">{noteCount(d)}ノート</span>
             </div>
@@ -39,6 +43,7 @@ export default async function DomainPage({ params }: { params: Promise<{ domain:
                 </div>
                 {g.notes.map((n) => (
                   <Link key={n.id} href={`/n/${n.id}`} className={`note-link h-row${hasNote(n.id) ? "" : " empty"}`} title={n.desc}>
+                    <Icon glyph={PageIcon} color="var(--color-text-subtlest)" />
                     {n.title}
                   </Link>
                 ))}

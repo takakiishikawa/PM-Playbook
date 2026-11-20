@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FileIcon from "@atlaskit/icon/core/file";
 import InformationCircleIcon from "@atlaskit/icon/core/information-circle";
+import HomeIcon from "@atlaskit/icon/core/home";
 import { DOMAINS, noteCount } from "@/content/structure";
 import { DomainMenu, type MenuDomain } from "./domain-menu";
 import { SearchTrigger } from "./search-trigger";
@@ -30,6 +31,12 @@ export function Header({ crumbs, showSearch = true, currentDomain, currentNote }
             <span className="crumbs-divider" aria-hidden="true" />
             <nav aria-label="パンくず" className="crumbs-nav">
               <ol className="crumbs">
+                <li className="crumb-home">
+                  <Link href="/" className="icon-link">
+                    <Icon glyph={HomeIcon} />
+                    ホーム
+                  </Link>
+                </li>
                 {crumbs.map((c, i) => (
                   <li key={`${i}:${c.label}`} title={c.label}>
                     {c.href ? <Link href={c.href}>{c.label}</Link> : <span className="current" aria-current="page">{c.label}</span>}

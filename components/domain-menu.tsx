@@ -6,6 +6,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import ChevronDownIcon from "@atlaskit/icon/core/chevron-down";
 import { announceOverlayOpen, trapTab, useCloseOnOtherOverlay, useEscape } from "@/lib/overlay";
 import { Icon } from "./icon";
+import { DomainIcon } from "./domain-icon";
 
 export type MenuDomain = {
   no: number;
@@ -68,6 +69,7 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
                   onClick={() => setActive(x.slug)}
                 >
                   <span className="no">{x.no}</span>
+                  <DomainIcon slug={x.slug} color={x.slug === active ? "var(--color-link)" : undefined} />
                   <span className="name">{x.name}</span>
                   <span className="count">{x.count}</span>
                 </button>

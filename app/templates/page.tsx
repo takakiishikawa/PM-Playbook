@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import DownloadIcon from "@atlaskit/icon/core/download";
 import LinkExternalIcon from "@atlaskit/icon/core/link-external";
+import FileIcon from "@atlaskit/icon/core/file";
+import PageIcon from "@atlaskit/icon/core/page";
 import { TEMPLATES, type Template } from "@/content/templates";
 import { findNote, notePath } from "@/content/structure";
 import { Header } from "@/components/header";
@@ -48,12 +50,18 @@ function TemplateRow({ t }: { t: Template }) {
   return (
     <tr id={t.id}>
       <td>
-        <div className="tpl-name">
-          <span className="n">{t.name}</span>
-          <span className="d">{t.desc}</span>
+        <div className="tpl-cell">
+          <Icon glyph={FileIcon} color="var(--color-text-subtle)" />
+          <div className="tpl-name">
+            <span className="n">{t.name}</span>
+            <span className="d">{t.desc}</span>
+          </div>
         </div>
       </td>
-      <td className="tpl-used">{note ? <Link href={`/n/${note.id}`}>{notePath(note)}</Link> : null}</td>
+      <td className="tpl-used">{note ? <Link href={`/n/${note.id}`} className="icon-link">
+            <Icon glyph={PageIcon} />
+            {notePath(note)}
+          </Link> : null}</td>
       <td>
         <span className="lozenge">{t.kind}</span>
       </td>

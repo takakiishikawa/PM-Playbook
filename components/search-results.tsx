@@ -3,6 +3,8 @@
 import Link from "next/link";
 import PageIcon from "@atlaskit/icon/core/page";
 import FileIcon from "@atlaskit/icon/core/file";
+import SearchIcon from "@atlaskit/icon/core/search";
+import WarningIcon from "@atlaskit/icon/core/warning";
 import type { SearchResult, Snippet } from "@/lib/search";
 import { Icon, type Glyph } from "./icon";
 
@@ -73,6 +75,7 @@ export function SearchResultList({
 export function SearchEmpty({ term, related, onPick }: { term: string; related: SearchResult["related"]; onPick: () => void }) {
   return (
     <div className="search-empty">
+      <Icon glyph={SearchIcon} color="var(--color-text-subtlest)" />
       <span className="t">「{term}」を含むノートはありません</span>
       <span className="d">言葉を変えて探してみてください。</span>
       {related.length > 0 ? (
@@ -92,6 +95,7 @@ export function SearchEmpty({ term, related, onPick }: { term: string; related: 
 export function SearchError() {
   return (
     <div className="search-empty">
+      <Icon glyph={WarningIcon} color="var(--color-icon-warning, #b38600)" />
       <span className="t">検索できませんでした</span>
       <span className="d">ページを読み込み直してから、もう一度試してください。</span>
     </div>

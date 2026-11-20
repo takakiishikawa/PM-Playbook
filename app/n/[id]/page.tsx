@@ -4,7 +4,9 @@ import type { Metadata } from "next";
 import { ALL_NOTES, findNote } from "@/content/structure";
 import { formatUpdated, loadNote, neighbors } from "@/lib/content";
 import { renderMdx } from "@/lib/render-mdx";
+import ClockIcon from "@atlaskit/icon/core/clock";
 import { Header } from "@/components/header";
+import { Icon } from "@/components/icon";
 import { mdxComponents } from "@/components/mdx";
 import { Toc } from "@/components/toc";
 import { PrevNext } from "@/components/prev-next";
@@ -46,7 +48,12 @@ export default async function NotePage({ params }: Params) {
             {lede ? <p className="lede">{lede}</p> : null}
             <div className="meta">
               <span className="stage">{stage}</span>
-              {updated ? <span>{updated}</span> : null}
+              {updated ? (
+                <span className="meta-item">
+                  <Icon glyph={ClockIcon} />
+                  {updated}
+                </span>
+              ) : null}
             </div>
           </div>
           {content ?? (
