@@ -14,6 +14,7 @@ import puppeteer from "puppeteer-core";
 
 const ROOT = process.cwd();
 const NOTES = path.join(ROOT, "content", "notes");
+const PAGES = path.join(ROOT, "content", "pages");
 const OUT = path.join(ROOT, "content", "diagrams");
 const MERMAID = path.join(ROOT, "node_modules", "mermaid", "dist", "mermaid.min.js");
 
@@ -59,8 +60,28 @@ const CONFIG = {
     quadrantYAxisTextFill: "#505258",
     quadrantInternalBorderStrokeFill: "#ffffff",
     quadrantExternalBorderStrokeFill: "#ffffff",
+    // マインドマップ・ジャーニーなど、色を順に使う図は青と灰色の濃淡だけにする
+    cScale0: "#e9f2fe", cScale1: "#f5f7fa", cScale2: "#e9f2fe", cScale3: "#f5f7fa", cScale4: "#e9f2fe", cScale5: "#f5f7fa",
+    cScale6: "#e9f2fe", cScale7: "#f5f7fa", cScale8: "#e9f2fe", cScale9: "#f5f7fa", cScale10: "#e9f2fe", cScale11: "#f5f7fa",
+    cScaleLabel0: "#292a2e", cScaleLabel1: "#292a2e", cScaleLabel2: "#292a2e", cScaleLabel3: "#292a2e", cScaleLabel4: "#292a2e", cScaleLabel5: "#292a2e",
+    cScaleLabel6: "#292a2e", cScaleLabel7: "#292a2e", cScaleLabel8: "#292a2e", cScaleLabel9: "#292a2e", cScaleLabel10: "#292a2e", cScaleLabel11: "#292a2e",
+    // ガントチャート：通常は灰色、強調（crit）は主色
+    taskBkgColor: "#e9f2fe", taskBorderColor: "#cfe1fd", taskTextColor: "#292a2e", taskTextDarkColor: "#292a2e", taskTextOutsideColor: "#292a2e",
+    critBkgColor: "#1868db", critBorderColor: "#1868db", taskTextLightColor: "#ffffff",
+    activeTaskBkgColor: "#cfe1fd", activeTaskBorderColor: "#1868db", doneTaskBkgColor: "#f5f7fa", doneTaskBorderColor: "#dfe1e6",
+    sectionBkgColor: "#ffffff", altSectionBkgColor: "#f5f7fa", sectionBkgColor2: "#ffffff", gridColor: "#dfe1e6", todayLineColor: "#ffffff",
+    // グラフ・レーダー
+    xyChart: { plotColorPalette: "#1868db, #8c8f97, #cfe1fd", backgroundColor: "#ffffff", titleColor: "#292a2e", xAxisLabelColor: "#505258", yAxisLabelColor: "#505258", xAxisLineColor: "#8c8f97", yAxisLineColor: "#8c8f97", xAxisTickColor: "#8c8f97", yAxisTickColor: "#8c8f97", xAxisTitleColor: "#505258", yAxisTitleColor: "#505258" },
+    cScaleInv0: "#1868db",
+    fillType0: "#e9f2fe", fillType1: "#f5f7fa",
   },
-  flowchart: { useMaxWidth: false, htmlLabels: true, curve: "basis", nodeSpacing: 28, rankSpacing: 36, padding: 14, wrappingWidth: 300 },
+  radar: { useMaxWidth: false, width: 520, height: 420, curveTension: 0.1 },
+  xyChart: { useMaxWidth: false, width: 640, height: 360 },
+  gantt: { useMaxWidth: false, barHeight: 24, barGap: 6, fontSize: 13, sectionFontSize: 13, leftPadding: 96, gridLineStartPadding: 24 },
+  journey: { useMaxWidth: false, width: 100, leftMargin: 120, diagramMarginX: 20, boxMargin: 8 },
+  mindmap: { useMaxWidth: false, padding: 12 },
+  flowchart: { useMaxWidth: false, htmlLabels: true, curve: "basis", nodeSpacing: 28, rankSpacing: 36, padding: 14, wrappingWidth: 300, minNodeWidth: 64 },
+  state: { useMaxWidth: false, minNodeWidth: 64 },
   quadrantChart: { useMaxWidth: false, chartWidth: 520, chartHeight: 360, titleFontSize: 16, quadrantLabelFontSize: 15, xAxisLabelFontSize: 13, yAxisLabelFontSize: 13 },
 };
 
@@ -81,8 +102,12 @@ function tidy(svg: string): string {
 
 async function main() {
   const wanted = new Map<string, string>();
-  for (const f of fs.readdirSync(NOTES).filter((f) => f.endsWith(".mdx"))) {
-    const src = fs.readFileSync(path.join(NOTES, f), "utf8");
+  const files = [
+    ...fs.readdirSync(NOTES).filter((f) => f.endsWith(".mdx")).map((f) => path.join(NOTES, f)),
+    ...fs.readdirSync(PAGES).filter((f) => f.endsWith(".mdx")).map((f) => path.join(PAGES, f)),
+  ];
+  for (const file of files) {
+    const src = fs.readFileSync(file, "utf8");
     for (const m of src.matchAll(FENCE)) wanted.set(diagramHash(m[1]), m[1].trim());
   }
   fs.mkdirSync(OUT, { recursive: true });

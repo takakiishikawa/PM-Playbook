@@ -35,7 +35,7 @@ export function loadNote(id: string): NoteDoc | null {
 }
 
 /** H2・H3 を目次用に取り出す。id は rehype-slug と同じ github-slugger で、表示される文字から作る */
-function extractHeadings(src: string): Heading[] {
+export function extractHeadings(src: string): Heading[] {
   const slugger = new GithubSlugger();
   const headings: Heading[] = [];
   for (const line of src.split("\n")) {

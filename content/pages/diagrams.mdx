@@ -1,0 +1,289 @@
+---
+title: 図解ライブラリ
+lede: ノートで使える図解の部品。講義の図がないときは、ここから選んで表す。
+---
+
+## 選び方
+
+講義の図があれば、まずそれを使う。ない場合は、伝えたいことの形に合わせて選ぶ。一点物の図は作らない。
+
+| 伝えたいこと | 使う部品 |
+| --- | --- |
+| 並列の3〜4項目 | Cards |
+| 項目ごとの比較・定義 | 表 |
+| 一方向の手順（4段階まで・説明が短い） | Steps |
+| 分岐や戻りのある流れ | フロー |
+| 上位から下位への分解 | ツリー |
+| 担当や場所ごとのまとまり | グループ |
+| 2つの軸で位置づける | 2軸マトリクス |
+| 重なり・含む関係 | ベン図 |
+| 結果に対する原因の整理 | 特性要因図 |
+| 1つのテーマからの分類の広がり | マインドマップ |
+| 状態と、その移り変わり | 状態遷移図 |
+| 期間・順番・依存関係 | ガントチャート |
+| 積み重なる層 | 層構造 |
+| 複数の観点での比較 | レーダー |
+| 数値の推移・大小 | グラフ |
+| 段階ごとの体験と気持ち | ジャーニー |
+
+<Note title="書き方">Cards・Steps・表はMDXの部品。そのほかは Mermaid で書き、`npm run render:diagrams` でSVGに書き出す。横に並べるのは4つまで。それ以上は縦（TD）にする。強調したい箱には `class ID accent` を付ける。</Note>
+
+## 完成した部品
+
+### Cards
+
+並列の3〜4項目。それぞれに短い説明を付ける。
+
+<Cards>
+  <Card label="誰の">ユーザーの特定。PMの仕事</Card>
+  <Card label="何の課題を">課題の特定。PMの仕事</Card>
+  <Card label="どのように解決するか">解決策の特定。チームの仕事</Card>
+</Cards>
+
+### Steps
+
+一方向に進む手順。4段階までで説明が短ければ横、それ以外は縦に並ぶ。
+
+<Steps>
+  <Step title="方向性を示す">どこへ向かうかを示す</Step>
+  <Step title="目標を決める">目指す状態と、解くべき課題を決める</Step>
+  <Step title="必要な準備をする">実現するために行動する</Step>
+</Steps>
+
+### 表
+
+項目ごとの比較や定義。左の列に項目名を置く。
+
+| | プロダクトマネージャー | プロジェクトマネージャー |
+| --- | --- | --- |
+| 業務 | 意思決定 | 調整 |
+| 目的 | プロダクトの改善 | プロジェクトの完了 |
+
+## フロー
+
+分岐や戻りのある流れ。戻りがなく一方向なら Steps を使う。
+
+<Diagram caption="例：デザインのプロセス。フィードバックで戻る">
+
+```mermaid
+flowchart LR
+  A["<b>モックアップ</b>"] --> B["<b>フィードバック</b>"]
+  B -->|直す| A
+  B --> C["<b>開発</b>"]
+  class B accent
+```
+
+</Diagram>
+
+## ツリー
+
+上位の目的を、下位の要素に分解する。
+
+<Diagram caption="例：エピックをユーザーストーリーに分ける">
+
+```mermaid
+flowchart TD
+  E["<b>エピック</b><br>商品を購入するための機能一式"]
+  E --> S1[カートに入れる]
+  E --> S2[決済方法を選ぶ]
+  E --> S3[住所を入力する]
+  class E accent
+```
+
+</Diagram>
+
+## グループ
+
+担当や場所ごとのまとまりと、その間の流れ。
+
+<Diagram caption="例：顧客の行動と、顧客と接する従業員の行動">
+
+```mermaid
+flowchart LR
+  subgraph 顧客のアクション
+    a1[予約する] --> a2[到着する]
+  end
+  subgraph オンステージ
+    b1[荷物を受け取る] --> b2[宿泊の手続きをする]
+  end
+  a2 --> b1
+```
+
+</Diagram>
+
+## 2軸マトリクス
+
+2つの軸で、4つの領域に分けて位置づける。
+
+<Diagram caption="例：インパクトと労力">
+
+```mermaid
+%%{init: {"themeVariables": {"quadrant1Fill": "#f5f7fa", "quadrant2Fill": "#e9f2fe", "quadrant3Fill": "#ffffff", "quadrant4Fill": "#f5f7fa"}}}%%
+quadrantChart
+  x-axis 労力が小さい --> 労力が大きい
+  y-axis インパクトが小さい --> インパクトが大きい
+  quadrant-1 長期計画が必要
+  quadrant-2 優先度が高い
+  quadrant-3 優先度低め
+  quadrant-4 価値が低い
+```
+
+</Diagram>
+
+## ベン図
+
+2つ以上の集合の重なり。
+
+<Diagram caption="例：PMFは、商品と市場が交わるところ">
+
+```mermaid
+venn-beta
+  set A["商品"]
+  set B["市場"]
+  union A,B["PMF"]
+```
+
+</Diagram>
+
+## 特性要因図
+
+1つの結果に対して、原因を分類して並べる。
+
+<Diagram caption="例：有料プランが増えない原因の仮説">
+
+```mermaid
+ishikawa-beta
+  有料プランが増えない
+    情報
+      導入メリットが伝わらない
+    プロダクト
+      初期設定が分かりにくい
+    価格
+      料金に抵抗がある
+```
+
+</Diagram>
+
+## マインドマップ
+
+1つのテーマから、分類が広がっていく様子。
+
+<Diagram caption="例：要求の分類">
+
+```mermaid
+mindmap
+  root((要求))
+    機能要求
+    非機能要求
+      性能
+      セキュリティ
+    業務プロセス
+```
+
+</Diagram>
+
+## 状態遷移図
+
+ものの状態と、その移り変わり。
+
+<Diagram caption="例：チケットの状態">
+
+```mermaid
+stateDiagram-v2
+  direction LR
+  [*] --> 未着手
+  未着手 --> 進行中
+  進行中 --> レビュー
+  レビュー --> 進行中: 差し戻し
+  レビュー --> 完了
+```
+
+</Diagram>
+
+## ガントチャート
+
+期間と順番、依存関係。強調したい作業には `crit` を付ける。
+
+<Diagram caption="例：長い経路がクリティカルパス">
+
+```mermaid
+gantt
+  dateFormat YYYY-MM-DD
+  axisFormat %d日
+  section 経路1
+    A :a1, 2026-01-01, 2d
+    B :a2, after a1, 3d
+    C :a3, after a2, 5d
+  section 経路2
+    D :crit, d1, 2026-01-01, 4d
+    E :crit, d2, after d1, 4d
+    F :crit, d3, after d2, 4d
+```
+
+</Diagram>
+
+## 層構造
+
+下の層の上に、次の層が積み重なる関係。
+
+<Diagram caption="例：ソフトウェアの層">
+
+```mermaid
+block-beta
+  columns 1
+  a["アプリケーション"]
+  b["ミドルウェア"]
+  c["OS"]
+  d["ハードウェア"]
+```
+
+</Diagram>
+
+## レーダー
+
+複数の観点で、2〜3者を比べる。
+
+<Diagram caption="例：訴求したい価値の比較">
+
+```mermaid
+radar-beta
+  axis p["価格"], f["機能"], n["新規性"], e["効率性"], u["独自性"]
+  curve a["既存サービス"]{4, 3, 1, 2, 1}
+  curve b["新サービス"]{2, 2, 4, 5, 4}
+  max 5
+```
+
+</Diagram>
+
+## グラフ
+
+数値の推移や大小。
+
+<Diagram caption="例：棒グラフ">
+
+```mermaid
+xychart-beta
+  x-axis ["1か月", "2か月", "3か月", "4か月"]
+  y-axis "継続率（%）" 0 --> 100
+  bar [100, 80, 70, 65]
+```
+
+</Diagram>
+
+## ジャーニー
+
+段階ごとの行動と、そのときの気持ち（1〜5）。
+
+<Diagram caption="例：購入までの体験">
+
+```mermaid
+journey
+  section 検討
+    商品を比べる: 2: ユーザー
+    レビューを読む: 4: ユーザー
+  section 購入
+    住所を入力する: 1: ユーザー
+    決済する: 3: ユーザー
+```
+
+</Diagram>

@@ -13,7 +13,7 @@
 - `content/templates.ts` / `content/templates/*.md` … テンプレート一覧とダウンロード用ファイル。`usedIn` には使う場面のノートIDを書く。
 - `content/pages/*.html` … コンセプトとデザインシステムの本文（デザインで確定した静的HTML）。目次は id 付きの H2 から自動で作る（`lib/static-page.ts`）。
 - `components/mdx.tsx` … ノートで使える部品：`Mark` `Note` `Caution` `Cards` `Card` `Steps` `Step` `NoteLink` `TemplateLink` `Figure` `Diagram`。表は自動で横スクロールできる枠に入る。
-- 汎用の図（フロー・ツリー・2軸の図など）は Mermaid で書く。`<Diagram caption="…">` の中に ```mermaid を置き、`npm run render:diagrams` で `content/diagrams/{hash}.svg` に書き出す（閲覧時にJavaScriptを使わない。手元のChromeとNoto Sans JP／Noto Sans CJK JPが要る）。横に並べるのは4つまで、それ以上は flowchart TD。太字は `<b>`。
+- 汎用の図は Mermaid で書く。使える種類と使い分けの見本は `/diagrams`（`content/pages/diagrams.mdx`）。`<Diagram caption="…">` の中に ```mermaid を置き、`npm run render:diagrams` で `content/diagrams/{hash}.svg` に書き出す（閲覧時にJavaScriptを使わない。手元のChromeとNoto Sans JP／Noto Sans CJK JPが要る）。横に並べるのは4つまで、それ以上は flowchart TD。太字は `<b>`。
 - `lib/content.ts`（ノートの読み込み・目次）、`lib/render-mdx.tsx`（MDXの描画）、`lib/search.ts`（検索）、`lib/auth.ts`・`lib/env.ts`（閲覧者の判定・環境変数）。
 - 検索は、ビルド時に作る索引 `/api/search-index` をブラウザが1回読み込み、`lib/search-core.ts` で手元で照合する（タイトル・説明・本文の部分一致）。
 

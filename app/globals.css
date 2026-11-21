@@ -426,3 +426,11 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .recent-row { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
 .recent-row:last-child { border-bottom: none; }
 .recent-row .path { font-size: 12px; line-height: 16px; color: var(--color-text-subtlest); }
+/* レーダー・マインドマップの色（Mermaid の既定色を主色と灰色に置き換える） */
+.diagram svg .radarCurve-0 { fill: rgba(24, 104, 219, 0.16) !important; stroke: #1868db !important; stroke-width: 2px !important; }
+.diagram svg .radarCurve-1 { fill: rgba(140, 143, 151, 0.12) !important; stroke: #8c8f97 !important; stroke-width: 2px !important; }
+.diagram svg .radarLegendBox-0, .diagram svg .radarLegendBox-0 rect { fill: #1868db !important; }
+.diagram svg .radarLegendBox-1, .diagram svg .radarLegendBox-1 rect { fill: #8c8f97 !important; }
+.diagram svg .section-root circle, .diagram svg .section-root rect, .diagram svg .section-root path { fill: #1868db !important; }
+.diagram svg .section-root .nodeLabel, .diagram svg .section-root .nodeLabel p { color: #ffffff !important; }
+.diagram svg .mindmap .edge, .diagram svg path.edge.section-edge-0, .diagram svg path[class*="section-edge"] { stroke: #cfe1fd !important; }
