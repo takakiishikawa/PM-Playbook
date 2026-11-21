@@ -76,7 +76,7 @@ export function SearchEmpty({ term, related, onPick }: { term: string; related: 
   return (
     <div className="search-empty">
       <Icon glyph={SearchIcon} color="var(--color-text-subtlest)" />
-      <span className="t">「{term}」を含むノートはありません</span>
+      <span className="t">「{term}」を含むノートはない</span>
       <span className="d">言葉を変えて探してみてください。</span>
       {related.length > 0 ? (
         <div className="related">
@@ -97,7 +97,7 @@ export function SearchError() {
   return (
     <div className="search-empty">
       <Icon glyph={WarningIcon} color="var(--color-icon-warning, #b38600)" />
-      <span className="t">検索できませんでした</span>
+      <span className="t">検索できなかった</span>
       <span className="d">ページを読み込み直してから、もう一度試してください。</span>
     </div>
   );

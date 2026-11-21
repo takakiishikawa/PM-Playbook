@@ -14,7 +14,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ domain: string }> }): Promise<Metadata> {
   const d = findDomain((await params).domain);
-  return { title: d?.name ?? "見つかりません" };
+  return { title: d?.name ?? "見つからない" };
 }
 
 export default async function DomainPage({ params }: { params: Promise<{ domain: string }> }) {
@@ -34,14 +34,14 @@ export default async function DomainPage({ params }: { params: Promise<{ domain:
             <p className="lede">{d.desc}</p>
           </div>
           <div className="group-grid">
-            {d.groups.map((g) => (
-              <section key={g.name} className="group">
+            {d.groups.map((g, gi) => (
+              <section key={g.name} className="group" id={`g${gi + 1}`}>
                 <div className="group-head">
                   <h2>{g.name}</h2>
                   <span className="count">{g.notes.length}</span>
                 </div>
                 {g.notes.map((n) => (
-                  <Link key={n.id} href={`/n/${n.id}`} className={`note-link h-row${hasNote(n.id) ? "" : " empty"}`} title={n.desc}>
+                  <Link key={n.id} href={`/n/${n.id}`} className={`note-link h-row${hasNote(n.id) ? "" : " empty"}`}>
                     <Icon glyph={PageIcon} color="var(--color-text-subtlest)" />
                     {n.title}
                   </Link>

@@ -213,9 +213,9 @@ export const DOMAINS: Domain[] = [
   }),
   defineDomain({
     no: 9,
-    slug: "others",
-    name: "その他",
-    desc: "どの領域にも横断して関わるもの。",
+    slug: "ai",
+    name: "AI",
+    desc: "AIの基本と、リサーチ・デザイン・要件定義への活用。",
     groups: [
       ["AI活用", [
         ["AIの基本とPMの視点", "AIの種類、導入時のポイント、可能性と限界"],

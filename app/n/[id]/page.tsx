@@ -2,11 +2,9 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { ALL_NOTES, findNote } from "@/content/structure";
-import { formatUpdated, loadNote, neighbors } from "@/lib/content";
+import { crossing, loadNote, neighbors } from "@/lib/content";
 import { renderMdx } from "@/lib/render-mdx";
-import ClockIcon from "@atlaskit/icon/core/clock";
 import { Header } from "@/components/header";
-import { Icon } from "@/components/icon";
 import { mdxComponents } from "@/components/mdx";
 import { Toc } from "@/components/toc";
 import { PrevNext } from "@/components/prev-next";
@@ -20,7 +18,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const n = findNote((await params).id);
-  if (!n) return { title: "見つかりません" };
+  if (!n) return { title: "見つからない" };
   const doc = loadNote(n.id);
   return { title: doc?.meta.title || n.title, description: doc?.meta.lede || n.desc };
 }
@@ -33,13 +31,12 @@ export default async function NotePage({ params }: Params) {
   const d = note.domain;
   const groupLabel = note.groupName;
   const title = doc?.meta.title || note.title;
-  const updated = formatUpdated(doc?.meta.updated);
   const content = doc ? await renderMdx(doc.body) : null;
   const { Note } = mdxComponents;
 
   return (
     <>
-      <Header crumbs={[{ label: d.name, href: `/d/${d.slug}` }, { label: groupLabel }]} currentDomain={d.slug} currentNote={note.id} />
+      <Header crumbs={[{ label: d.name, href: `/d/${d.slug}` }, { label: groupLabel, href: `/d/${d.slug}#g${note.groupIndex + 1}` }]} currentDomain={d.slug} currentNote={note.id} />
       <main className="page with-toc" id="main">
         <article className="main article" id="note-body">
           <div className="title-block">
@@ -50,13 +47,10 @@ export default async function NotePage({ params }: Params) {
               <p>このノートはまだ講義の内容から書き起こしていない。</p>
             </Note>
           )}
-          {updated ? (
-            <p className="note-updated">
-              <Icon glyph={ClockIcon} />
-              最終更新 {updated}
-            </p>
-          ) : null}
-          <PrevNext prev={prev && { id: prev.id, title: prev.title }} next={next && { id: next.id, title: next.title }} />
+          <PrevNext
+            prev={prev && { id: prev.id, title: prev.title, cross: crossing(note, prev) }}
+            next={next && { id: next.id, title: next.title, cross: crossing(note, next) }}
+          />
         </article>
         {doc ? <Toc items={doc.headings} /> : null}
         <Suspense fallback={null}>

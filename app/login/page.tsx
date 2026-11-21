@@ -8,7 +8,7 @@ type Search = { denied?: string; error?: string };
 
 export default async function LoginPage({ searchParams }: { searchParams: Promise<Search> }) {
   const sp = await searchParams;
-  const message = sp.denied ? "このアカウントには閲覧の許可がありません。別のアカウントでログインしてください。" : sp.error ? "ログインに失敗しました。もう一度お試しください。" : null;
+  const message = sp.denied ? "このアカウントには閲覧の許可がない。別のアカウントでログインする。" : sp.error ? "ログインに失敗した。もう一度試す。" : null;
 
   return (
     <main className="login-page" id="main">
@@ -16,7 +16,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
         <LogoMark size={56} />
         <div className="login-head">
           <h1>PM Playbook にログイン</h1>
-          <p>許可されたアカウントだけが閲覧できます。</p>
+          <p>許可されたアカウントだけが閲覧できる。</p>
         </div>
         {message ? (
           <p className="login-alert" role="alert">

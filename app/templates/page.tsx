@@ -22,7 +22,7 @@ export default function TemplatesPage() {
               <h1 className="h1">テンプレート</h1>
               <span className="lozenge">{TEMPLATES.length}件</span>
             </div>
-            <p className="lede">そのまま使えるシートとテンプレート。使う場面のノートから開くこともできます。</p>
+            <p className="lede">そのまま使えるシートとテンプレート。使う場面のノートからも開ける。</p>
           </div>
           <table className="ui-table">
             <thead>

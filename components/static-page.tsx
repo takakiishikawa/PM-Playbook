@@ -9,7 +9,7 @@ export function StaticPage({ name, label, wide = false }: { name: StaticPageName
     <>
       <Header crumbs={[{ label }]} />
       <main className={wide ? "page with-toc wide" : "page with-toc"} id="main">
-        <div className="main" dangerouslySetInnerHTML={{ __html: html }} />
+        <div className="main static-body" dangerouslySetInnerHTML={{ __html: html }} />
         <Toc items={toc} />
       </main>
     </>

@@ -42,7 +42,10 @@ function extractHeadings(src: string): Heading[] {
     const m = /^(##|###)\s+(.+)$/.exec(line.trim());
     if (!m) continue;
     const text = stripInline(m[2]).trim();
-    headings.push({ level: m[1] === "##" ? 2 : 3, text, id: slugger.slug(text) });
+    // 原則はノートの先頭にあるので目次には載せない（id は本文の見出しとそろえるため slug は進める）
+    const id = slugger.slug(text);
+    if (text === "原則") continue;
+    headings.push({ level: m[1] === "##" ? 2 : 3, text, id });
   }
   return headings;
 }
@@ -73,8 +76,16 @@ export function formatUpdated(u?: string): string | null {
 }
 
 /** 同じ領域の中での前後のノート（グループをまたいで続く） */
+/** 前後のノート。領域の端では隣の領域へつなぐ */
 export function neighbors(note: FlatNote): { prev?: FlatNote; next?: FlatNote } {
-  const list = ALL_NOTES.filter((n) => n.domain.slug === note.domain.slug);
-  const i = list.findIndex((n) => n.id === note.id);
-  return { prev: i > 0 ? list[i - 1] : undefined, next: i >= 0 && i < list.length - 1 ? list[i + 1] : undefined };
+  const i = ALL_NOTES.findIndex((n) => n.id === note.id);
+  return { prev: i > 0 ? ALL_NOTES[i - 1] : undefined, next: i >= 0 && i < ALL_NOTES.length - 1 ? ALL_NOTES[i + 1] : undefined };
+}
+
+/** 移った先がどこか。グループや領域が変わるときだけ名前を返す */
+export function crossing(from: FlatNote, to: FlatNote | undefined): { kind: "domain" | "group"; name: string } | undefined {
+  if (!to) return undefined;
+  if (to.domain.slug !== from.domain.slug) return { kind: "domain", name: to.domain.name };
+  if (to.groupIndex !== from.groupIndex) return { kind: "group", name: to.groupName };
+  return undefined;
 }

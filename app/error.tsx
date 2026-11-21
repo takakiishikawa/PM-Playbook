@@ -14,7 +14,7 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
   return (
     <main className="page" id="main">
       <div className="wrap-880 status-page">
-        <h1 className="h1">表示できませんでした</h1>
+        <h1 className="h1">表示できなかった</h1>
         <p className="lede">一時的な問題の可能性がある。もう一度読み込むか、ホームから開き直す。</p>
         <div className="status-actions">
           <button type="button" className="btn-subtle h-btn" onClick={reset}>
