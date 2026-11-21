@@ -60,7 +60,7 @@ const CONFIG = {
     quadrantInternalBorderStrokeFill: "#ffffff",
     quadrantExternalBorderStrokeFill: "#ffffff",
   },
-  flowchart: { useMaxWidth: false, htmlLabels: true, curve: "basis", nodeSpacing: 28, rankSpacing: 40, padding: 14, wrappingWidth: 220 },
+  flowchart: { useMaxWidth: false, htmlLabels: true, curve: "basis", nodeSpacing: 28, rankSpacing: 36, padding: 14, wrappingWidth: 300 },
   quadrantChart: { useMaxWidth: false, chartWidth: 520, chartHeight: 360, titleFontSize: 16, quadrantLabelFontSize: 15, xAxisLabelFontSize: 13, yAxisLabelFontSize: 13 },
 };
 

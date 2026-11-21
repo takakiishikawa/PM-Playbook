@@ -87,7 +87,7 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
                       {g.name}
                     </h3>
                     {g.notes.map((n) => (
-                      <Link key={n.id} href={`/n/${n.id}`} onClick={close} className={n.id === currentNote ? "current h-ghost" : "h-ghost"} aria-current={n.id === currentNote ? "page" : undefined}>
+                      <Link key={n.id} href={`/n/${n.id}`} onClick={close} className="h-ghost" aria-current={n.id === currentNote ? "page" : undefined}>
                         {n.title}
                       </Link>
                     ))}

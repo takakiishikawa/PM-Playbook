@@ -12,7 +12,8 @@
 - `content/notes/{id}.mdx` … ノート本文。ファイルがないノートは「準備中」と表示される。
 - `content/templates.ts` / `content/templates/*.md` … テンプレート一覧とダウンロード用ファイル。`usedIn` には使う場面のノートIDを書く。
 - `content/pages/*.html` … コンセプトとデザインシステムの本文（デザインで確定した静的HTML）。目次は id 付きの H2 から自動で作る（`lib/static-page.ts`）。
-- `components/mdx.tsx` … ノートで使える部品：`Mark` `Note` `Caution` `Cards` `Card` `Steps` `Step` `NoteLink` `TemplateLink` `Figure`。表は自動で横スクロールできる枠に入る。
+- `components/mdx.tsx` … ノートで使える部品：`Mark` `Note` `Caution` `Cards` `Card` `Steps` `Step` `NoteLink` `TemplateLink` `Figure` `Diagram`。表は自動で横スクロールできる枠に入る。
+- 汎用の図（フロー・ツリー・2軸の図など）は Mermaid で書く。`<Diagram caption="…">` の中に ```mermaid を置き、`npm run render:diagrams` で `content/diagrams/{hash}.svg` に書き出す（閲覧時にJavaScriptを使わない。手元のChromeとNoto Sans JP／Noto Sans CJK JPが要る）。横に並べるのは4つまで、それ以上は flowchart TD。太字は `<b>`。
 - `lib/content.ts`（ノートの読み込み・目次）、`lib/render-mdx.tsx`（MDXの描画）、`lib/search.ts`（検索）、`lib/auth.ts`・`lib/env.ts`（閲覧者の判定・環境変数）。
 - 検索は、ビルド時に作る索引 `/api/search-index` をブラウザが1回読み込み、`lib/search-core.ts` で手元で照合する（タイトル・説明・本文の部分一致）。
 
@@ -28,6 +29,7 @@
 - 並列3〜4個は `<Cards>`、順番のあるプロセスは `<Steps>`。4段階までで説明が短ければ横並び、それ以外は自動で縦に並ぶ。使いすぎない。
 - 太字の閉じ記号の直前に句点を置かない（「〜する**。」と書く）。句点のあとに `**` を置くと太字にならない。
 - テンプレートは使うプロセスの中に `<TemplateLink>` で置く。
+- 図の使い方：講義の図があればそれを使う。なければ表・Cards・Steps・Mermaid で表す。一点物の図は作らない。説明の重複は1か所に寄せ、そのノートの理解に必要な場合だけ残す。
 - 詳しくは `/design-system`。
 
 ## 開発

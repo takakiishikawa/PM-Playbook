@@ -44,7 +44,7 @@ function Card({ label, children }: { label?: string; children: ReactNode }) {
   return (
     <div className="card">
       {label ? <span className="l">{label}</span> : null}
-      <span className="b">{children}</span>
+      <div className="b">{children}</div>
     </div>
   );
 }

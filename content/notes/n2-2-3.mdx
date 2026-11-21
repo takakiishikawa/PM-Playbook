@@ -41,10 +41,20 @@ updated: 2026-11
 
 ### Impact vs. Effort
 
-| | Low Effort | High Effort |
-| --- | --- | --- |
-| High Impact | 優先度が高い | 長期計画が必要 |
-| Low Impact | 優先度低め | 価値が低い |
+<Diagram caption="インパクトと労力の2軸で課題をマッピングする">
+
+```mermaid
+%%{init: {"themeVariables": {"quadrant1Fill": "#f5f7fa", "quadrant2Fill": "#e9f2fe", "quadrant3Fill": "#ffffff", "quadrant4Fill": "#f5f7fa"}}}%%
+quadrantChart
+  x-axis 労力が小さい --> 労力が大きい
+  y-axis インパクトが小さい --> インパクトが大きい
+  quadrant-1 長期計画が必要
+  quadrant-2 優先度が高い
+  quadrant-3 優先度低め
+  quadrant-4 価値が低い
+```
+
+</Diagram>
 
 インパクトにはユーザー満足度の向上やビジネスへの寄与、労力には開発の時間・リソース、部署間の調整、技術的な難易度を含める。視覚的に分かりやすく、議論がスムーズになる。
 

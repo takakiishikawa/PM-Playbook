@@ -12,14 +12,16 @@ updated: 2026-11
 
 ## プロセス
 
-<Steps>
-  <Step title="仕様">何を作るかを決める</Step>
-  <Step title="ワイヤーフレーム">画面の骨組みと流れを描く</Step>
-  <Step title="モックアップ">本デザインを作る</Step>
-  <Step title="フィードバック">レビューを受けて直す</Step>
-  <Step title="プロトタイプ">必要に応じて動く試作で確かめる</Step>
-  <Step title="開発">実装に渡す</Step>
-</Steps>
+<Diagram caption="フィードバックを受けて直す往復も、見積もりに入れておく">
+
+```mermaid
+flowchart TD
+  A["<b>仕様</b>"] --> B["<b>ワイヤーフレーム</b>"] --> C["<b>モックアップ</b>"] --> D["<b>フィードバック</b>"]
+  D -->|直す| C
+  D --> E["<b>プロトタイプ</b>"] --> F["<b>開発</b>"]
+```
+
+</Diagram>
 
 ## デザイン要件定義
 
