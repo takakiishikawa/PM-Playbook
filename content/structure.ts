@@ -12,8 +12,6 @@ export type Domain = {
   slug: string;
   name: string;
   desc: string;
-  /** グループを「1から順に進める」並びとして見せるか（STEP番号を付ける） */
-  ordered: boolean;
   groups: Group[];
 };
 
@@ -41,7 +39,6 @@ export const DOMAINS: Domain[] = [
     slug: "foundation",
     name: "プロダクトマネジメント基礎",
     desc: "プロダクトマネジメントとは何か、PMに必要な考え方と意思決定。",
-    ordered: false,
     groups: [
       ["プロダクトマネジメントとは", ["プロダクトとプロダクトマネジメント", "PMの役割と仕事", "課題解決はプロダクトに閉じない", "PMのキャリアと強みの活かし方", "エンジニア・デザイナー出身のPM", "ビジネス職出身のPM", "ドメインエキスパートのPM"]],
       ["マインドセット", ["ユーザー志向", "マーケットとテクノロジーへの感度", "チームワーク", "リーダーシップ"]],
@@ -54,7 +51,6 @@ export const DOMAINS: Domain[] = [
     slug: "bizdev",
     name: "事業開発",
     desc: "事業の筋を見極め、事業として成り立たせる。",
-    ordered: false,
     groups: [
       ["事業開発の基礎", ["事業開発とは", "TAM・SAM・SOM", "顧客と課題の仮説検証"]],
       ["事業アイデア", ["「不」の発見", "フレームワークで磨く"]],
@@ -69,7 +65,6 @@ export const DOMAINS: Domain[] = [
     slug: "strategy",
     name: "プロダクト戦略・ロードマップ",
     desc: "進む方向と、取り組む順番を決める。",
-    ordered: false,
     groups: [
       ["プロダクト戦略", [
         ["プロダクト戦略の全体像", "上位戦略との関係、構成要素、ライフサイクル"],
@@ -87,8 +82,7 @@ export const DOMAINS: Domain[] = [
     no: 3,
     slug: "discovery",
     name: "課題探索",
-    desc: "誰のどんな課題を解くのかを、ファクトと仮説検証で確かめる。1から順に進めます。",
-    ordered: true,
+    desc: "誰のどんな課題を解くのかを、ファクトと仮説検証で確かめる。",
     groups: [
       ["考え方", [
         ["課題探索の全体像", "PMの仕事の流れと、仮説を積み上げて真実にたどり着く考え方"],
@@ -135,7 +129,6 @@ export const DOMAINS: Domain[] = [
     slug: "solution",
     name: "解決策設計",
     desc: "課題に対する解き方を設計し、要件に落とす。",
-    ordered: false,
     groups: [
       ["解決策・企画", ["解決策とは", "アイデアの発散と絞り込み", "解決策の仮説とプロトタイプ"]],
       ["要件定義", ["ユーザー要求とAs-Is・To-Be", "機能要求の洗い出し", "要件定義の進め方", "抜け漏れと矛盾を防ぐ", "PRDとは", "効果的なPRDの書き方", "チケットの役割と書き方"]],
@@ -146,7 +139,6 @@ export const DOMAINS: Domain[] = [
     slug: "build",
     name: "実装（デザイン・技術）",
     desc: "デザインと技術の基本。PMとして押さえる範囲だけ。",
-    ordered: false,
     groups: [
       ["デザイン", [
         ["デザインとは", "デザインは課題解決のためにある"],
@@ -170,7 +162,6 @@ export const DOMAINS: Domain[] = [
     slug: "analytics",
     name: "データ分析・効果計測",
     desc: "効いたかどうかを、データで確かめる。",
-    ordered: false,
     groups: [
       ["基本", [
         ["データ分析の重要性とバイアス", "正しい意思決定を続けるために"],
@@ -195,7 +186,6 @@ export const DOMAINS: Domain[] = [
     slug: "project",
     name: "プロジェクトマネジメント",
     desc: "期限の中で目標を達成するための管理。",
-    ordered: false,
     groups: [
       ["基本", ["プロジェクトとは", "開発手法", "スクラム"]],
       ["スコープ", ["スコープの決め方"]],
@@ -216,7 +206,6 @@ export const DOMAINS: Domain[] = [
     slug: "security",
     name: "セキュリティ",
     desc: "プロダクトと情報を守るための基本。",
-    ordered: false,
     groups: [
       ["基本", ["セキュリティの3要素と攻撃", "クラウドセキュリティとゼロトラスト"]],
       ["データの扱い", ["個人情報の扱い"]],
@@ -227,7 +216,6 @@ export const DOMAINS: Domain[] = [
     slug: "others",
     name: "その他",
     desc: "どの領域にも横断して関わるもの。",
-    ordered: false,
     groups: [
       ["AI活用", [
         ["AIの基本とPMの視点", "AIの種類、導入時のポイント、可能性と限界"],

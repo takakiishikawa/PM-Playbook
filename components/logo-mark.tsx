@@ -1,6 +1,6 @@
 /**
  * ロゴのマーク。課題（的）に向けて引く補助線（点線）。
- * PdM＝課題に向かう仕事、このプロダクト＝そのための補助線。app/icon.svg と同じ形。
+ * PM＝課題に向かう仕事、このプロダクト＝そのための補助線。app/icon.svg と同じ形。
  */
 export function LogoMark({ size = 24, title }: { size?: number; title?: string }) {
   return (

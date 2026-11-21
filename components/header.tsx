@@ -15,7 +15,6 @@ const MENU: MenuDomain[] = DOMAINS.map((d) => ({
   slug: d.slug,
   name: d.name,
   count: noteCount(d),
-  ordered: d.ordered,
   groups: d.groups.map((g) => ({ name: g.name, notes: g.notes.map((n) => ({ id: n.id, title: n.title })) })),
 }));
 

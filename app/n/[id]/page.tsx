@@ -31,10 +31,8 @@ export default async function NotePage({ params }: Params) {
   const doc = loadNote(note.id);
   const { prev, next } = neighbors(note);
   const d = note.domain;
-  // 順番のある領域では、パンくずのグループ名に STEP の番号を添える
-  const groupLabel = d.ordered ? `STEP ${note.groupIndex + 1}　${note.groupName}` : note.groupName;
+  const groupLabel = note.groupName;
   const title = doc?.meta.title || note.title;
-  const lede = doc?.meta.lede || note.desc;
   const updated = formatUpdated(doc?.meta.updated);
   const content = doc ? await renderMdx(doc.body) : null;
   const { Note } = mdxComponents;
@@ -46,7 +44,6 @@ export default async function NotePage({ params }: Params) {
         <article className="main article" id="note-body">
           <div className="title-block">
             <h1 className="h1">{title}</h1>
-            {lede ? <p className="lede">{lede}</p> : null}
           </div>
           {content ?? (
             <Note title="準備中">

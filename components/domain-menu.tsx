@@ -14,17 +14,13 @@ export type MenuDomain = {
   slug: string;
   name: string;
   count: number;
-  /** 順番のある領域（課題探索など）だけ、グループに番号を付ける。領域ページの STEP 表示と合わせる */
-  ordered?: boolean;
   groups: { name: string; notes: { id: string; title: string }[] }[];
 };
 
-/** 最初に開いたときに選んでおく領域（今いる領域がなければ「課題探索」） */
-const DEFAULT_DOMAIN = "discovery";
-
 /** ヘッダーの「領域」メニュー。左に領域、右に選んだ領域のノート。今読んでいるノートに印を付ける */
 export function DomainMenu({ domains, currentDomain, currentNote }: { domains: MenuDomain[]; currentDomain?: string; currentNote?: string }) {
-  const initial = currentDomain ?? (domains.some((d) => d.slug === DEFAULT_DOMAIN) ? DEFAULT_DOMAIN : domains[0].slug);
+  // 今いる領域があればそれを、なければ先頭の領域を選んでおく
+  const initial = currentDomain ?? domains[0].slug;
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(initial);
   const pathname = usePathname();
@@ -80,20 +76,19 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
             <div className="panel">
               <div className="panel-head">
                 <span className="panel-title">{d.name}</span>
-                <Link href={`/d/${d.slug}`} onClick={close} className="icon-link">
+                <Link href={`/d/${d.slug}`} onClick={close} className="panel-open h-ghost">
                   領域ページを開く
                   <Icon glyph={ArrowRightIcon} />
                 </Link>
               </div>
               <div className="groups">
-                {d.groups.map((g, gi) => (
+                {d.groups.map((g) => (
                   <section key={g.name}>
                     <h3 className="section-label">
-                      {d.ordered ? `${gi + 1}　` : ""}
                       {g.name}
                     </h3>
                     {g.notes.map((n) => (
-                      <Link key={n.id} href={`/n/${n.id}`} onClick={close} className={n.id === currentNote ? "current" : undefined} aria-current={n.id === currentNote ? "page" : undefined}>
+                      <Link key={n.id} href={`/n/${n.id}`} onClick={close} className={n.id === currentNote ? "current h-ghost" : "h-ghost"} aria-current={n.id === currentNote ? "page" : undefined}>
                         {n.title}
                       </Link>
                     ))}

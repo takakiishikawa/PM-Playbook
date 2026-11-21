@@ -34,10 +34,9 @@ export default async function DomainPage({ params }: { params: Promise<{ domain:
             <p className="lede">{d.desc}</p>
           </div>
           <div className="group-grid">
-            {d.groups.map((g, gi) => (
+            {d.groups.map((g) => (
               <section key={g.name} className="group">
                 <div className="group-head">
-                  {d.ordered ? <span className="step-no">{gi + 1}</span> : null}
                   <h2>{g.name}</h2>
                   <span className="count">{g.notes.length}</span>
                 </div>
