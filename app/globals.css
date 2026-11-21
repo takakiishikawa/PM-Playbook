@@ -225,6 +225,7 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .domain-row { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto 16px; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--color-border); color: var(--color-text); }
 .domain-row:last-child { border-bottom: none; }
 .domain-row .name { font-weight: 700; min-width: 0; }
+.domain-row .name .sub, .domain-menu .list .name .sub { margin-left: 8px; font-size: 12px; font-weight: 400; color: var(--color-text-subtlest); }
 .domain-row .count { font-size: 13px; line-height: 20px; color: var(--color-text-subtlest); }
 
 /* ---------- domain page ---------- */

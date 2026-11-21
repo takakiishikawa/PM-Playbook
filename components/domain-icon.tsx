@@ -7,7 +7,7 @@ import ToolsIcon from "@atlaskit/icon/core/tools";
 import ChartBarIcon from "@atlaskit/icon/core/chart-bar";
 import TimelineIcon from "@atlaskit/icon/core/timeline";
 import ShieldIcon from "@atlaskit/icon/core/shield";
-import AiSparkleIcon from "@atlaskit/icon/core/ai-sparkle";
+import ShapesIcon from "@atlaskit/icon/core/shapes";
 import { Icon, type Glyph } from "./icon";
 
 /** 領域ごとのアイコン。一覧で領域を見分けやすくするためのもの */
@@ -21,7 +21,7 @@ const DOMAIN_GLYPHS: Record<string, Glyph> = {
   analytics: ChartBarIcon,
   project: TimelineIcon,
   security: ShieldIcon,
-  ai: AiSparkleIcon,
+  others: ShapesIcon,
 };
 
 export function DomainIcon({ slug, color = "var(--color-text-subtle)" }: { slug: string; color?: string }) {

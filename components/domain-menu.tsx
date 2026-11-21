@@ -14,6 +14,7 @@ export type MenuDomain = {
   slug: string;
   name: string;
   count: number;
+  sub?: string;
   groups: { name: string; notes: { id: string; title: string }[] }[];
 };
 
@@ -68,7 +69,10 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
                   onClick={() => setActive(x.slug)}
                 >
                   <DomainIcon slug={x.slug} color={x.slug === active ? "var(--color-text)" : undefined} />
-                  <span className="name">{x.name}</span>
+                  <span className="name">
+                    {x.name}
+                    {x.sub ? <span className="sub">{x.sub}</span> : null}
+                  </span>
                   <span className="count">{x.count}</span>
                 </button>
               ))}

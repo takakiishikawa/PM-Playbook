@@ -27,7 +27,10 @@ export default function Home() {
               {DOMAINS.map((d) => (
                 <Link key={d.slug} href={`/d/${d.slug}`} className="domain-row h-row">
                   <DomainIcon slug={d.slug} />
-                  <span className="name">{d.name}</span>
+                  <span className="name">
+                    {d.name}
+                    {d.listGroups ? <span className="sub">{d.groups.map((g) => g.name).join("・")}</span> : null}
+                  </span>
                   <span className="count">{noteCount(d)}</span>
                   <Icon glyph={ChevronRightIcon} color="var(--color-text-subtlest)" />
                 </Link>
