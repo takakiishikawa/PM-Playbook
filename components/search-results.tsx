@@ -54,7 +54,7 @@ export function SearchResultList({
             role="option"
             aria-selected={selected === i}
             tabIndex={-1}
-            className={`result ${selected === i ? "selected h-sel" : "h-row"}`}
+            className={`result${label ? " recent" : ""} ${selected === i ? "selected h-sel" : "h-row"}`}
             onMouseMove={() => onHover(i)}
             onClick={onPick}
           >

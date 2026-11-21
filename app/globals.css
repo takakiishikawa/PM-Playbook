@@ -251,6 +251,10 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .article h3 { margin: 36px 0 12px; font-size: 19px; line-height: 30px; font-weight: 700; letter-spacing: 0.02em; }
 .article p { margin: 0 0 20px; }
 .article ul, .article ol { margin: 0 0 20px; padding-left: 1.5em; display: flex; flex-direction: column; gap: 8px; }
+/* 番号付きリスト：番号を小さな丸に入れて、本文と揃える */
+.article ol { list-style: none; padding-left: 0; counter-reset: ol; }
+.article ol > li { position: relative; padding-left: 34px; counter-increment: ol; }
+.article ol > li::before { content: counter(ol); position: absolute; left: 0; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--color-background-selected); color: var(--color-link); font-size: 12px; line-height: 22px; font-weight: 700; text-align: center; letter-spacing: 0; }
 .article li > p { margin: 0; }
 .article strong { font-weight: 700; }
 .table-wrap { margin: 8px 0 24px; overflow-x: auto; }
@@ -260,6 +264,8 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .article td:first-child, .article th:first-child { min-width: 6.5em; }
 .article th { background: var(--elevation-surface-sunken); font-size: 12px; color: var(--color-text-subtle); }
 .mark { background: linear-gradient(transparent 58%, #cfe1fd 58%); padding: 0 2px; }
+/* 本文中の強調は、太字ではなくマーカーで示す（箇条書きの先頭の見出し語は太字のまま） */
+.article p strong, .article li strong:not(:first-child), .block-note strong, .block-caution strong { font-weight: 400; background: linear-gradient(transparent 58%, #cfe1fd 58%); padding: 0 2px; }
 .block-note { padding: 20px 24px; border-radius: var(--radius-medium); background: var(--elevation-surface-sunken); margin: 8px 0 24px; display: flex; flex-direction: column; gap: 4px; }
 .block-note .t { font-size: 15px; line-height: 24px; font-weight: 700; }
 .block-note p:last-child { margin: 0; }
@@ -321,8 +327,8 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .prevnext .next { text-align: right; align-items: flex-end; }
 .prevnext .next .dir { justify-content: flex-end; }
 .prevnext .ctx { margin-top: auto; padding-top: 4px; font-size: 12px; line-height: 16px; color: var(--color-text-subtlest); }
-.prevnext .ctx.changed { font-weight: 700; color: var(--color-text); }
-.prevnext .t { font-size: 15px; line-height: 24px; font-weight: 700; }
+.prevnext .ctx.changed { color: var(--color-text); }
+.prevnext .t { font-size: 15px; line-height: 24px; }
 .kbd-sm { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; font-size: 11px; line-height: 1; color: var(--color-text-subtle); background: var(--color-background-neutral); border-radius: var(--radius-small); padding: 0 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
 /* ---------- tables in UI pages ---------- */
@@ -388,7 +394,8 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 
 /* ---------- icons beside text ---------- */
 .title-icon { display: inline-flex; align-items: center; justify-content: center; }
-.title-icon .icon, .title-icon svg { width: 28px !important; height: 28px !important; }
+.title-icon { width: 36px; height: 36px; margin-top: 2px; }
+.title-icon .icon, .title-icon svg { width: 36px !important; height: 36px !important; }
 .icon-link { display: inline-flex; align-items: center; gap: 6px; }
 .tpl-cell { display: flex; align-items: flex-start; gap: 10px; }
 .tpl-cell > .icon { padding-top: 2px; }
@@ -436,3 +443,5 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .diagram svg .section-root .nodeLabel, .diagram svg .section-root .nodeLabel p { color: #ffffff !important; }
 .diagram svg .mindmap .edge, .diagram svg path.edge.section-edge-0, .diagram svg path[class*="section-edge"] { stroke: #cfe1fd !important; }
 .diagram svg .taskText.critText0, .diagram svg .taskText.critText1, .diagram svg .taskText.critText2, .diagram svg .taskText.critText3, .diagram svg [class*="critText"] { fill: #ffffff !important; }
+
+.result.recent .title { font-weight: 400; }
