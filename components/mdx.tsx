@@ -7,6 +7,7 @@ import LinkExternalIcon from "@atlaskit/icon/core/link-external";
 import { findNote } from "@/content/structure";
 import { findTemplate } from "@/content/templates";
 import { Figure } from "./figure";
+import { Diagram, Pre } from "./diagram";
 import { Icon } from "./icon";
 
 function Mark({ children }: { children: ReactNode }) {
@@ -118,4 +119,4 @@ function Table(props: React.ComponentProps<"table">) {
   );
 }
 
-export const mdxComponents = { Mark, Note, Caution, Cards, Card, Steps, Step, NoteLink, TemplateLink, Figure, table: Table };
+export const mdxComponents = { Mark, Note, Caution, Cards, Card, Steps, Step, NoteLink, TemplateLink, Figure, Diagram, table: Table, pre: Pre };

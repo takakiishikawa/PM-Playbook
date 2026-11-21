@@ -75,10 +75,9 @@ export function DomainMenu({ domains, currentDomain, currentNote }: { domains: M
             </div>
             <div className="panel">
               <div className="panel-head">
-                <span className="panel-title">{d.name}</span>
-                <Link href={`/d/${d.slug}`} onClick={close} className="panel-open h-ghost">
-                  領域ページを開く
-                  <Icon glyph={ArrowRightIcon} />
+                <Link href={`/d/${d.slug}`} onClick={close} className="panel-open h-ghost" title="領域ページへ">
+                  {d.name}
+                  <Icon glyph={ArrowRightIcon} color="var(--color-text-subtle)" />
                 </Link>
               </div>
               <div className="groups">

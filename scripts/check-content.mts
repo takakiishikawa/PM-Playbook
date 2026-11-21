@@ -7,6 +7,7 @@ import { compile } from "@mdx-js/mdx";
 import remarkGfm from "remark-gfm";
 import { ALL_NOTES } from "../content/structure.ts";
 import { TEMPLATES } from "../content/templates.ts";
+import { FENCE, diagramHash } from "./render-diagrams.mts";
 
 const ROOT = process.cwd();
 const NOTES_DIR = path.join(ROOT, "content", "notes");
@@ -75,6 +76,10 @@ for (const f of files.sort()) {
   for (const m of content.matchAll(/<NoteLink id="([^"]+)"/g)) if (!noteIds.has(m[1])) error(f, `リンク先のノート ${m[1]} がない`);
   for (const m of content.matchAll(/<TemplateLink id="([^"]+)"/g)) if (!templateIds.has(m[1])) error(f, `テンプレート ${m[1]} がない`);
   for (const m of content.matchAll(/<Figure src="([^"]+)"/g)) if (!fs.existsSync(path.join(ROOT, "public", m[1]))) error(f, `図 ${m[1]} がない`);
+
+  for (const m of content.matchAll(FENCE)) {
+    if (!fs.existsSync(path.join(ROOT, "content", "diagrams", `${diagramHash(m[1])}.svg`))) error(f, "図（mermaid）が書き出されていない。npm run render:diagrams を実行する");
+  }
 
   content.split("\n").forEach((line, i) => {
     for (const s of brokenBold(line)) error(`${f}:${i + 1}`, `太字が閉じない「${s}」`);

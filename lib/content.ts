@@ -57,7 +57,7 @@ function stripInline(s: string): string {
 
 /** 検索用に MDX から記号とタグを取り除いた本文 */
 function toPlain(src: string): string {
-  return stripInline(src)
+  return stripInline(src.replace(/```mermaid\n[\s\S]*?```/g, " "))
     .replace(/<[^>]*?(label|title|hint|caption|alt)="([^"]*)"[^>]*?>/g, " $2 ")
     .replace(/<[^>]+>/g, " ")
     .replace(/^#{1,6}\s+/gm, "")

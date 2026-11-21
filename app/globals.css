@@ -86,8 +86,8 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .h-row:active { background: var(--elevation-surface-pressed) !important; }
 .h-sel:hover { background: var(--color-background-selected-hovered) !important; text-decoration: none; }
 .h-sel:active { background: var(--color-background-selected-pressed) !important; }
-.h-ghost:hover { background: var(--color-background-neutral) !important; text-decoration: none; }
-.h-ghost:active { background: var(--color-background-neutral-hovered) !important; }
+.h-ghost:hover { background: var(--elevation-surface-hovered) !important; text-decoration: none; }
+.h-ghost:active { background: var(--elevation-surface-pressed) !important; }
 .h-btn:hover { background: var(--color-background-neutral-hovered) !important; text-decoration: none; }
 .h-btn:active { background: var(--color-background-neutral-pressed) !important; }
 .h-float:hover { background: var(--elevation-surface-hovered) !important; }
@@ -143,10 +143,10 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .domain-menu .menu-label { padding: 8px 10px 6px; }
 .domain-menu .list .name { flex: 1; }
 .domain-menu .list .count { font-size: 12px; color: var(--color-text-subtlest); font-weight: 400; }
-.domain-menu .panel-head { display: flex; align-items: center; gap: 12px; }
-.domain-menu .panel-open { display: inline-flex; align-items: center; gap: 4px; height: 28px; padding: 0 8px; border-radius: var(--radius-small); font-size: 13px; color: var(--color-link); }
+.domain-menu .panel-head { display: flex; align-items: center; }
+.domain-menu .panel-open { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 8px; margin-left: -8px; border-radius: var(--radius-small); font-size: 16px; line-height: 24px; font-weight: 700; color: var(--color-text); }
 .domain-menu .panel-open:hover { text-decoration: none; }
-.domain-menu .panel-title { font-size: 16px; line-height: 24px; font-weight: 700; }
+.domain-menu .panel-title { font-size: 16px; line-height: 24px; font-weight: 700; color: var(--color-text); }
 .domain-menu .groups h3 { margin: 0 0 4px; }
 .domain-menu .list button.active { background: var(--elevation-surface-hovered); color: var(--color-text); }
 .domain-menu .list button.active.h-sel:hover { background: var(--elevation-surface-hovered) !important; }
@@ -241,7 +241,7 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 
 /* ---------- note (article typography) ---------- */
 .article { font-size: 16px; line-height: 28px; letter-spacing: 0.04em; }
-.article h2 { position: relative; margin: 56px 0 20px; padding-left: 16px; font-size: 24px; line-height: 36px; font-weight: 700; letter-spacing: 0.02em; font-feature-settings: "palt"; }
+.article h2 { position: relative; margin: 56px 0 24px; padding-left: 16px; font-size: 24px; line-height: 36px; font-weight: 700; letter-spacing: 0.02em; font-feature-settings: "palt"; }
 /* 見出しの左に、主色の短いバーを置いてメリハリをつける */
 .article h2::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 4px; border-radius: 2px; background: var(--color-link); }
 .article > h2:first-child, .article .first, .article .title-block + h2 { margin-top: 0; }
@@ -249,28 +249,28 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .title-block .lede { margin: 0; }
 .static-body h2 { position: relative; margin: 0 0 16px; padding-left: 16px; font-size: 24px; line-height: 36px; font-weight: 700; letter-spacing: 0.02em; font-feature-settings: "palt"; }
 .static-body h2::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 4px; border-radius: 2px; background: var(--color-link); }
-.article h3 { margin: 36px 0 10px; font-size: 19px; line-height: 30px; font-weight: 700; letter-spacing: 0.02em; }
-.article p { margin: 0 0 16px; }
-.article ul, .article ol { margin: 0 0 16px; padding-left: 1.5em; display: flex; flex-direction: column; gap: 8px; }
+.article h3 { margin: 36px 0 12px; font-size: 19px; line-height: 30px; font-weight: 700; letter-spacing: 0.02em; }
+.article p { margin: 0 0 20px; }
+.article ul, .article ol { margin: 0 0 20px; padding-left: 1.5em; display: flex; flex-direction: column; gap: 8px; }
 .article li > p { margin: 0; }
 .article strong { font-weight: 700; }
-.table-wrap { margin: 0 0 16px; overflow-x: auto; }
+.table-wrap { margin: 8px 0 24px; overflow-x: auto; }
 .article table { width: 100%; border-collapse: collapse; margin: 0; font-size: 14px; line-height: 22px; letter-spacing: 0.02em; }
 .article th, .article td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
 /* 1列目は見出し役で短いことが多いので、つぶれないよう最低幅を持たせる */
 .article td:first-child, .article th:first-child { min-width: 6.5em; }
 .article th { background: var(--elevation-surface-sunken); font-size: 12px; color: var(--color-text-subtle); }
 .mark { background: linear-gradient(transparent 58%, #cfe1fd 58%); padding: 0 2px; }
-.block-note { padding: 20px 24px; border-radius: var(--radius-medium); background: var(--elevation-surface-sunken); margin: 0 0 16px; display: flex; flex-direction: column; gap: 4px; }
+.block-note { padding: 20px 24px; border-radius: var(--radius-medium); background: var(--elevation-surface-sunken); margin: 8px 0 24px; display: flex; flex-direction: column; gap: 4px; }
 .block-note .t { font-size: 15px; line-height: 24px; font-weight: 700; }
 .block-note p:last-child { margin: 0; }
-.block-caution { padding: 12px 16px; border-radius: var(--radius-medium); background: var(--color-background-warning); margin: 0 0 16px; font-size: 15px; line-height: 26px; letter-spacing: 0.02em; }
+.block-caution { padding: 12px 16px; border-radius: var(--radius-medium); background: var(--color-background-warning); margin: 8px 0 24px; font-size: 15px; line-height: 26px; letter-spacing: 0.02em; }
 .block-caution .t { font-size: 12px; line-height: 16px; font-weight: 700; color: var(--color-text-warning); margin-right: 12px; letter-spacing: 0; }
-.cards { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 12px; margin: 0 0 16px; letter-spacing: 0.02em; }
+.cards { display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 12px; margin: 8px 0 24px; letter-spacing: 0.02em; }
 .card { padding: 14px 16px; border: 1px solid var(--color-border); border-radius: var(--radius-medium); display: flex; flex-direction: column; gap: 4px; }
 .card .l { font-size: 12px; line-height: 16px; font-weight: 700; color: var(--color-text-subtlest); }
 .card .b { font-size: 15px; line-height: 24px; }
-.steps { display: flex; gap: 8px; margin: 0 0 16px; letter-spacing: 0.02em; }
+.steps { display: flex; gap: 8px; margin: 8px 0 24px; letter-spacing: 0.02em; }
 .step { flex: 1 1 0; min-width: 0; padding: 14px 16px; border-radius: var(--radius-medium); background: var(--elevation-surface-sunken); display: flex; flex-direction: column; gap: 4px; }
 .step .n { font-size: 12px; line-height: 16px; font-weight: 700; color: var(--color-link); }
 .step .t { font-size: 15px; line-height: 24px; font-weight: 700; }
@@ -286,12 +286,26 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .template-link .k { font-size: 12px; line-height: 16px; font-weight: 700; color: var(--color-text-subtle); }
 .template-link .n { flex: 1; font-size: 14px; line-height: 20px; font-weight: 400; }
 .template-link .s { font-size: 12px; line-height: 16px; color: var(--color-text-subtlest); }
-.figure { margin: 8px 0 16px; display: flex; flex-direction: column; gap: 8px; max-width: 100%; width: 560px; }
+.figure { margin: 16px 0 28px; display: flex; flex-direction: column; gap: 8px; max-width: 100%; width: 560px; }
 .figure.big { width: 100%; }
 .figure .frame { position: relative; border: 1px solid var(--color-border); border-radius: var(--radius-medium); overflow: hidden; background: #fff; }
 .figure img { width: 100%; height: auto; display: block; cursor: zoom-in; }
 .figure.big img { cursor: zoom-out; }
 .figure .toggle { position: absolute; right: 8px; top: 8px; height: 28px; display: flex; align-items: center; gap: 4px; padding: 0 8px; border: none; border-radius: var(--radius-small); background: #fff; box-shadow: 0px 1px 1px #1e1f2140, 0px 0px 1px #1e1f214f; font-size: 12px; line-height: 16px; letter-spacing: 0; color: var(--color-text); }
+/* Mermaid の図（scripts/render-diagrams.mts で書き出した SVG）。形と線を Steps・Cards とそろえる */
+.diagram { margin: 16px 0 24px; display: flex; flex-direction: column; gap: 8px; }
+.diagram .frame { overflow-x: auto; }
+.diagram svg { display: block; max-width: 100%; height: auto; }
+.diagram svg .node rect, .diagram svg .node polygon, .diagram svg .node circle { rx: 6px; ry: 6px; stroke-width: 0 !important; }
+.diagram svg .node.accent rect { fill: var(--color-background-selected) !important; }
+.diagram svg .nodeLabel, .diagram svg .nodeLabel p { font-weight: 700; color: var(--color-text); line-height: 22px; }
+.diagram svg .edgeLabel, .diagram svg .edgeLabel p { font-size: 13px; color: var(--color-text-subtle); background: #fff !important; }
+.diagram svg .flowchart-link { stroke: var(--color-border-input) !important; stroke-width: 1.5px !important; }
+.diagram svg marker path { fill: var(--color-border-input) !important; stroke: none !important; }
+.diagram svg .cluster rect { rx: 8px; ry: 8px; fill: #fff !important; stroke: var(--color-border) !important; }
+.diagram svg .cluster-label .nodeLabel { font-size: 12px; color: var(--color-text-subtlest); }
+.diagram figcaption { font-size: 13px; line-height: 20px; letter-spacing: 0.02em; color: var(--color-text-subtlest); }
+.diagram .missing { padding: 12px; background: var(--color-background-warning); color: var(--color-text-warning); font-size: 13px; }
 .figure figcaption { font-size: 13px; line-height: 20px; letter-spacing: 0.02em; color: var(--color-text-subtlest); }
 .prevnext { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--color-border); }
 .prevnext a { display: flex; flex-direction: column; gap: 6px; padding: 16px 20px; border: 1px solid var(--color-border); border-radius: var(--radius-medium); color: var(--color-text); }

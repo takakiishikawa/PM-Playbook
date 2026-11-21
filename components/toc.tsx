@@ -6,8 +6,8 @@ export type TocItem = { id: string; text: string; level: 2 | 3 };
 
 /** 見出しがこの位置（画面の上から。ヘッダー48px＋余白）を越えたら「今読んでいる」とみなす */
 const ACTIVE_LINE_PX = 96;
-/** デザインシステム：H2が3つ以上のページにだけ目次を出す */
-const MIN_H2_FOR_TOC = 3;
+/** 原則を除くH2が2つ以上のページに目次を出す（1つだけなら要らない） */
+const MIN_H2_FOR_TOC = 2;
 
 /** 右の目次。今読んでいる見出しに印を付ける。狭い画面では CSS で隠す */
 export function Toc({ items }: { items: TocItem[] }) {
