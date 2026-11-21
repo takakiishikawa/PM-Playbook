@@ -36,7 +36,7 @@ export default async function NotePage({ params }: Params) {
 
   return (
     <>
-      <Header crumbs={[{ label: d.name, href: `/d/${d.slug}` }, { label: groupLabel, href: `/d/${d.slug}#g${note.groupIndex + 1}` }]} currentDomain={d.slug} currentNote={note.id} />
+      <Header crumbs={[{ label: d.name, href: `/d/${d.slug}` }, { label: groupLabel, href: `/d/${d.slug}#g${note.groupIndex + 1}` }, { label: title }]} currentDomain={d.slug} currentNote={note.id} />
       <main className="page with-toc" id="main">
         <article className="main article" id="note-body">
           <div className="title-block">
@@ -48,8 +48,8 @@ export default async function NotePage({ params }: Params) {
             </Note>
           )}
           <PrevNext
-            prev={prev && { id: prev.id, title: prev.title, cross: crossing(note, prev) }}
-            next={next && { id: next.id, title: next.title, cross: crossing(note, next) }}
+            prev={prev && { id: prev.id, title: prev.title, group: prev.groupName, domain: prev.domain.name, cross: crossing(note, prev) }}
+            next={next && { id: next.id, title: next.title, group: next.groupName, domain: next.domain.name, cross: crossing(note, next) }}
           />
         </article>
         {doc ? <Toc items={doc.headings} /> : null}

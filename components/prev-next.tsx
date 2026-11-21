@@ -8,17 +8,12 @@ import ArrowRightIcon from "@atlaskit/icon/core/arrow-right";
 import { Icon } from "./icon";
 
 type Cross = { kind: "domain" | "group"; name: string };
-type Item = { id: string; title: string; cross?: Cross } | undefined;
+type Item = { id: string; title: string; group: string; domain: string; cross?: Cross } | undefined;
 
-/** グループや領域をまたぐときは、移る先の名前を出して切り替わりに気づけるようにする */
-function CrossLabel({ cross }: { cross?: Cross }) {
-  if (!cross) return null;
-  return (
-    <span className={`cross ${cross.kind}`}>
-      <span className="k">{cross.kind === "domain" ? "領域" : "グループ"}</span>
-      {cross.name}
-    </span>
-  );
+/** 移る先のグループ名。領域をまたぐときは領域名も添え、切り替わるときは濃く表示して気づけるようにする */
+function Context({ item }: { item: NonNullable<Item> }) {
+  const label = item.cross?.kind === "domain" ? `${item.domain} / ${item.group}` : item.group;
+  return <span className={item.cross ? "ctx changed" : "ctx"}>{label}</span>;
 }
 
 /** ノート末尾の前後ナビ。[ と ] キーでも移動できる */
@@ -41,7 +36,7 @@ export function PrevNext({ prev, next }: { prev: Item; next: Item }) {
       {prev ? (
         <Link href={`/n/${prev.id}`} className={`h-row${prev.cross ? " crossing" : ""}`}>
           <span className="dir"><Icon glyph={ArrowLeftIcon} />前のノート<span className="kbd-sm">[</span></span>
-          <CrossLabel cross={prev.cross} />
+          <Context item={prev} />
           <span className="t">{prev.title}</span>
         </Link>
       ) : (
@@ -50,7 +45,7 @@ export function PrevNext({ prev, next }: { prev: Item; next: Item }) {
       {next ? (
         <Link href={`/n/${next.id}`} className={`h-row next${next.cross ? " crossing" : ""}`}>
           <span className="dir"><span className="kbd-sm">]</span>次のノート<Icon glyph={ArrowRightIcon} /></span>
-          <CrossLabel cross={next.cross} />
+          <Context item={next} />
           <span className="t">{next.title}</span>
         </Link>
       ) : (

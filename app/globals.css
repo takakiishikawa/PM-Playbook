@@ -313,14 +313,12 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .diagram .missing { padding: 12px; background: var(--color-background-warning); color: var(--color-text-warning); font-size: 13px; }
 .figure figcaption { font-size: 13px; line-height: 20px; letter-spacing: 0.02em; color: var(--color-text-subtlest); }
 .prevnext { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 80px; padding-top: 32px; border-top: 1px solid var(--color-border); }
-.prevnext a { display: flex; flex-direction: column; gap: 6px; padding: 16px 20px; border: 1px solid var(--color-border); border-radius: var(--radius-medium); color: var(--color-text); }
+.prevnext a { display: flex; flex-direction: column; gap: 4px; padding: 16px 20px; border: 1px solid var(--color-border); border-radius: var(--radius-medium); color: var(--color-text); }
 .prevnext .dir { display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 16px; color: var(--color-text-subtlest); }
 .prevnext .next { text-align: right; align-items: flex-end; }
 .prevnext .next .dir { justify-content: flex-end; }
-.prevnext .cross { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 4px; font-size: 13px; line-height: 20px; font-weight: 700; color: var(--color-text-subtle); }
-.prevnext .dir + .t { margin-top: auto; }
-.prevnext .cross .k { font-size: 11px; line-height: 16px; font-weight: 700; padding: 0 6px; border-radius: var(--radius-small); background: var(--color-background-neutral); color: var(--color-text-subtle); }
-.prevnext .cross.domain .k { background: var(--color-background-selected); color: var(--color-link); }
+.prevnext .ctx { margin-top: auto; padding-top: 4px; font-size: 12px; line-height: 16px; color: var(--color-text-subtlest); }
+.prevnext .ctx.changed { font-weight: 700; color: var(--color-text); }
 .prevnext .t { font-size: 15px; line-height: 24px; font-weight: 700; }
 .kbd-sm { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; font-size: 11px; line-height: 1; color: var(--color-text-subtle); background: var(--color-background-neutral); border-radius: var(--radius-small); padding: 0 4px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
