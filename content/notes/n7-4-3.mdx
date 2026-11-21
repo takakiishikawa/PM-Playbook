@@ -21,10 +21,17 @@ updated: 2026-11
 <Diagram caption="経路1は合計10日、経路2は合計12日。長い経路2がクリティカルパス">
 
 ```mermaid
-flowchart TD
-  S(["開始"]) --> A["<b>A</b><br>2日"] --> B["<b>B</b><br>3日"] --> C["<b>C</b><br>5日"] --> G(["完了"])
-  S --> D["<b>D</b><br>4日"] --> E["<b>E</b><br>4日"] --> F["<b>F</b><br>4日"] --> G
-  class D,E,F accent
+gantt
+  dateFormat YYYY-MM-DD
+  axisFormat %d日目
+  section 経路1（10日）
+    A 2日 :a1, 2026-01-01, 2d
+    B 3日 :a2, after a1, 3d
+    C 5日 :a3, after a2, 5d
+  section 経路2（12日）
+    D 4日 :crit, d1, 2026-01-01, 4d
+    E 4日 :crit, d2, after d1, 4d
+    F 4日 :crit, d3, after d2, 4d
 ```
 
 </Diagram>

@@ -60,6 +60,8 @@ const CONFIG = {
     quadrantYAxisTextFill: "#505258",
     quadrantInternalBorderStrokeFill: "#ffffff",
     quadrantExternalBorderStrokeFill: "#ffffff",
+    quadrantPointFill: "#1868db",
+    quadrantPointTextFill: "#292a2e",
     // マインドマップ・ジャーニーなど、色を順に使う図は青と灰色の濃淡だけにする
     cScale0: "#e9f2fe", cScale1: "#f5f7fa", cScale2: "#e9f2fe", cScale3: "#f5f7fa", cScale4: "#e9f2fe", cScale5: "#f5f7fa",
     cScale6: "#e9f2fe", cScale7: "#f5f7fa", cScale8: "#e9f2fe", cScale9: "#f5f7fa", cScale10: "#e9f2fe", cScale11: "#f5f7fa",
@@ -80,7 +82,7 @@ const CONFIG = {
   gantt: { useMaxWidth: false, barHeight: 24, barGap: 6, fontSize: 13, sectionFontSize: 13, leftPadding: 96, gridLineStartPadding: 24 },
   journey: { useMaxWidth: false, width: 100, leftMargin: 120, diagramMarginX: 20, boxMargin: 8 },
   mindmap: { useMaxWidth: false, padding: 12 },
-  flowchart: { useMaxWidth: false, htmlLabels: true, curve: "basis", nodeSpacing: 28, rankSpacing: 36, padding: 14, wrappingWidth: 300, minNodeWidth: 64 },
+  flowchart: { useMaxWidth: false, htmlLabels: true, curve: "basis", nodeSpacing: 28, rankSpacing: 36, padding: 14, wrappingWidth: 600, minNodeWidth: 64 },
   state: { useMaxWidth: false, minNodeWidth: 64 },
   quadrantChart: { useMaxWidth: false, chartWidth: 520, chartHeight: 360, titleFontSize: 16, quadrantLabelFontSize: 15, xAxisLabelFontSize: 13, yAxisLabelFontSize: 13 },
 };
@@ -95,7 +97,8 @@ function chromePath(): string {
 /** 書き出した SVG を本文に埋め込める形に整える（幅は本来の大きさ、背景なし） */
 function tidy(svg: string): string {
   const vb = /viewBox="([\d.\s-]+)"/.exec(svg)?.[1].trim().split(/\s+/).map(Number);
-  let out = svg.replace(/ style="[^"]*"/, "").replace(/ width="100%"/, "");
+  // ルートの svg 要素から既定の幅・高さ・style を外し、viewBox の大きさを付け直す
+  let out = svg.replace(/<svg [^>]*>/, (tag) => tag.replace(/ style="[^"]*"/, "").replace(/ (width|height)="[^"]*"/g, ""));
   if (vb && vb.length === 4) out = out.replace("<svg ", `<svg width="${Math.ceil(vb[2])}" height="${Math.ceil(vb[3])}" `);
   return out;
 }

@@ -305,6 +305,7 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .diagram svg .node.accent rect { fill: var(--color-background-selected) !important; }
 .diagram svg .nodeLabel, .diagram svg .nodeLabel p { color: var(--color-text); }
 .diagram svg .nodeLabel b { font-weight: 700; }
+.diagram svg foreignObject, .diagram svg foreignObject * { line-height: 1.5; }
 .diagram svg, .diagram svg * { font-family: inherit !important; }
 .diagram svg .edgeLabel, .diagram svg .edgeLabel p { font-size: 13px; color: var(--color-text-subtle); background: #fff !important; }
 .diagram svg .flowchart-link { stroke: var(--color-border-input) !important; stroke-width: 1.5px !important; }
@@ -434,3 +435,4 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .diagram svg .section-root circle, .diagram svg .section-root rect, .diagram svg .section-root path { fill: #1868db !important; }
 .diagram svg .section-root .nodeLabel, .diagram svg .section-root .nodeLabel p { color: #ffffff !important; }
 .diagram svg .mindmap .edge, .diagram svg path.edge.section-edge-0, .diagram svg path[class*="section-edge"] { stroke: #cfe1fd !important; }
+.diagram svg .taskText.critText0, .diagram svg .taskText.critText1, .diagram svg .taskText.critText2, .diagram svg .taskText.critText3, .diagram svg [class*="critText"] { fill: #ffffff !important; }
