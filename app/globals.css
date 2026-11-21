@@ -155,8 +155,7 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .domain-menu .groups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 28px; }
 .domain-menu .groups a { display: block; padding: 4px 8px; margin: 0 -8px; border-radius: var(--radius-small); color: var(--color-text); }
 .domain-menu .groups a:hover { text-decoration: none; }
-.domain-menu .groups a.current { display: flex; align-items: center; gap: 6px; color: var(--color-link); font-weight: 700; }
-.domain-menu .groups a.current::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--color-link); flex: 0 0 auto; }
+.domain-menu .groups a.current { background: var(--elevation-surface-hovered); font-weight: 700; }
 
 .search-dialog { position: fixed; z-index: 31; top: 72px; left: 50%; transform: translateX(-50%); width: min(720px, calc(100vw - 24px)); display: flex; flex-direction: column; max-height: calc(100vh - 120px); }
 .search-dialog .field { display: flex; align-items: center; gap: 10px; height: 40px; padding: 0 12px; border: 2px solid var(--color-border-focused); border-radius: var(--radius-medium); }
@@ -196,7 +195,6 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .with-toc > .main { flex: 0 1 var(--measure); min-width: 0; }
 .with-toc.wide > .main { flex-basis: 1040px; }
 .toc { flex: 0 0 200px; align-self: flex-start; position: sticky; top: 72px; margin-top: 8px; display: flex; flex-direction: column; gap: 2px; font-size: 13px; line-height: 20px; }
-.toc .toc-title { display: flex; align-items: center; gap: 6px; font-size: 12px; line-height: 16px; font-weight: 700; color: var(--color-text-subtle); padding: 0 0 8px 12px; }
 .toc a { padding: 4px 12px; color: var(--color-text-subtle); box-shadow: inset 1px 0 0 var(--color-border); }
 .toc a.lv3 { padding-left: 24px; color: var(--color-text-subtlest); }
 .toc a.active { color: var(--color-link); box-shadow: inset 2px 0 0 var(--color-link); }
@@ -257,6 +255,8 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .table-wrap { margin: 0 0 16px; overflow-x: auto; }
 .article table { width: 100%; border-collapse: collapse; margin: 0; font-size: 14px; line-height: 22px; letter-spacing: 0.02em; }
 .article th, .article td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+/* 1列目は見出し役で短いことが多いので、つぶれないよう最低幅を持たせる */
+.article td:first-child, .article th:first-child { min-width: 6.5em; }
 .article th { background: var(--elevation-surface-sunken); font-size: 12px; color: var(--color-text-subtle); }
 .mark { background: linear-gradient(transparent 58%, #cfe1fd 58%); padding: 0 2px; }
 .block-note { padding: 20px 24px; border-radius: var(--radius-medium); background: var(--elevation-surface-sunken); margin: 0 0 16px; display: flex; flex-direction: column; gap: 4px; }
@@ -361,7 +361,7 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 }
 
 /* ---------- icons beside text ---------- */
-.title-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--radius-small); background: var(--color-background-neutral); }
+.title-icon { display: inline-flex; align-items: center; justify-content: center; }
 .icon-link { display: inline-flex; align-items: center; gap: 6px; }
 .tpl-cell { display: flex; align-items: flex-start; gap: 10px; }
 .tpl-cell > .icon { padding-top: 2px; }
@@ -391,5 +391,5 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .article h2[id="原則"] + ul { margin: 0 0 8px; padding: 14px 20px 14px 40px; background: var(--color-background-selected); border-radius: var(--radius-medium); }
 .article h2[id="原則"] + ul > li { margin: 0; }
 .article h2[id="原則"] + ul > li + li { margin-top: 6px; }
-.article h2[id="原則"] + ul > li::marker { color: var(--color-link); }
+.article h2[id="原則"] + ul > li::marker { color: var(--color-text); }
 .logo svg, .login-card > svg { display: block; flex: 0 0 auto; }
