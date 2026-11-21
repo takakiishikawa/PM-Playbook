@@ -33,26 +33,41 @@ export function prepareIndex(data: SearchIndexData): SearchIndex {
   };
 }
 
-/** 最初に見つかった語の前後を切り出す。照合は小文字、表示は元の文字 */
+/** 一致した箇所の前後を、その行の中で切り出す。表のセルの並びより文章（句点を含む行）の一致を優先する。照合は小文字、表示は元の文字 */
 function snippetOf(text: string, lower: string, terms: string[]): Snippet | null {
-  let at = -1;
-  let len = 0;
+  type Cand = { at: number; len: number; prose: boolean };
+  let best: Cand | null = null;
   for (const t of terms) {
-    const i = lower.indexOf(t);
-    if (i !== -1 && (at === -1 || i < at)) {
-      at = i;
-      len = t.length;
+    for (let i = lower.indexOf(t); i !== -1; i = lower.indexOf(t, i + t.length)) {
+      const ls = lower.lastIndexOf("\n", i) + 1;
+      const le = lower.indexOf("\n", i);
+      const prose = lower.slice(ls, le === -1 ? undefined : le).includes("。");
+      if (!best || (prose && !best.prose) || (prose === best.prose && i < best.at)) best = { at: i, len: t.length, prose };
+      if (prose) break;
     }
   }
-  if (at < 0) return null;
-  const start = Math.max(0, at - SNIPPET_WIDTH);
-  const end = Math.min(text.length, at + len + SNIPPET_WIDTH);
-  const flat = (s: string) => s.replace(/\s+/g, " ");
+  if (!best) return null;
+  const { at, len } = best;
+  const lineStart = text.lastIndexOf("\n", at) + 1;
+  const nl = text.indexOf("\n", at + len);
+  const lineEnd = nl === -1 ? text.length : nl;
+  const start = Math.max(lineStart, at - SNIPPET_WIDTH);
+  const end = Math.min(lineEnd, at + len + SNIPPET_WIDTH);
+  const flat = (x: string) => x.replace(/\s+/g, " ");
   return {
-    before: (start > 0 ? "…" : "") + flat(text.slice(start, at)),
+    before: (start > lineStart ? "…" : "") + flat(text.slice(start, at)),
     hit: text.slice(at, at + len),
-    after: flat(text.slice(at + len, end)) + (end < text.length ? "…" : ""),
+    after: flat(text.slice(at + len, end)) + (end < lineEnd ? "…" : ""),
   };
+}
+
+/** タイトルの一致の強さ。0：検索語と同じ（「〜とは」も含む）、1：検索語で始まる、2：含む、3：含まない */
+function titleRank(nTitle: string, terms: string[]): number {
+  const t = nTitle.replace(/\s+/g, "");
+  const q = terms.join("");
+  if (t === q || t === `${q}とは`) return 0;
+  if (t.startsWith(q)) return 1;
+  return terms.some((x) => nTitle.includes(x)) ? 2 : 3;
 }
 
 function bigrams(s: string): Set<string> {
@@ -84,7 +99,7 @@ function related(q: string, entries: NoteEntry[]) {
 
 /**
  * タイトル・説明・本文の部分一致で探す。空白で区切った語はすべて含むもの（AND）だけを返す。
- * 並びは、タイトルに語を含むノートを先に、残りは領域の順（構成の並び順）。
+ * 並びは、タイトルが検索語と同じもの → 検索語で始まるもの → 含むもの → 本文だけに含むもの。同じ強さの中は領域の順（構成の並び順）。
  */
 export function search(index: SearchIndex, rawQ: string, domain?: string): SearchResult {
   const q = rawQ.slice(0, MAX_QUERY_LENGTH);
@@ -92,14 +107,13 @@ export function search(index: SearchIndex, rawQ: string, domain?: string): Searc
   if (terms.length === 0) return EMPTY_RESULT;
   const entries = index.notes.filter((e) => !domain || e.domain === domain);
 
-  const titleHits: NoteHit[] = [];
-  const otherHits: NoteHit[] = [];
+  const buckets: NoteHit[][] = [[], [], [], []];
   for (const e of entries) {
     const all = `${e.nTitle}\n${e.nBody}`;
     if (!terms.every((t) => all.includes(t))) continue;
     const hit = { id: e.id, title: e.title, path: e.path, snippet: snippetOf(e.body, e.nBody, terms) };
-    // 索引は構成の並び順なので、振り分けるだけで領域の昇順になる
-    (terms.some((t) => e.nTitle.includes(t)) ? titleHits : otherHits).push(hit);
+    // 索引は構成の並び順なので、振り分けるだけで同じ強さの中は領域の昇順になる
+    buckets[titleRank(e.nTitle, terms)].push(hit);
   }
 
   const templates: TemplateHit[] = domain
@@ -108,6 +122,6 @@ export function search(index: SearchIndex, rawQ: string, domain?: string): Searc
         .filter((t) => terms.every((term) => t.nText.includes(term)))
         .map((t) => ({ id: t.id, name: t.name, snippet: snippetOf(t.desc.normalize("NFKC"), t.nDesc, terms) }));
 
-  const notes = [...titleHits, ...otherHits];
+  const notes = buckets.flat();
   return { notes, templates, related: notes.length + templates.length === 0 ? related(q, entries) : [] };
 }

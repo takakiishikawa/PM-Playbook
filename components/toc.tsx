@@ -11,13 +11,14 @@ const MIN_H2_FOR_TOC = 2;
 
 /** 右の目次。今読んでいる見出しに印を付ける。狭い画面では CSS で隠す */
 export function Toc({ items }: { items: TocItem[] }) {
-  const [active, setActive] = useState(items[0]?.id);
+  const [active, setActive] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const els = items.map((i) => document.getElementById(i.id)).filter((e): e is HTMLElement => !!e);
     if (els.length === 0) return;
     const onScroll = () => {
-      let current = els[0].id;
+      // 最初の見出しにたどり着くまでは、どれも選ばない（その上にある原則を読んでいる）
+      let current: string | undefined;
       for (const el of els) {
         if (el.getBoundingClientRect().top <= ACTIVE_LINE_PX) current = el.id;
       }

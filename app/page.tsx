@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Icon } from "@/components/icon";
 import { HomeSearch } from "@/components/search-trigger";
 import { DomainIcon } from "@/components/domain-icon";
+import { RecentNotes } from "@/components/recent";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
             <h1 className="home-title">何を調べますか？</h1>
             <HomeSearch />
           </section>
+          <RecentNotes />
           <section className="stack-8">
             <div className="section-head">
               <h2>領域</h2>

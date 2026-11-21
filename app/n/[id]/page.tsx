@@ -9,6 +9,7 @@ import { mdxComponents } from "@/components/mdx";
 import { Toc } from "@/components/toc";
 import { PrevNext } from "@/components/prev-next";
 import { Highlighter } from "@/components/highlighter";
+import { RecordVisit } from "@/components/recent";
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -53,6 +54,7 @@ export default async function NotePage({ params }: Params) {
           />
         </article>
         {doc ? <Toc items={doc.headings} /> : null}
+        <RecordVisit id={note.id} title={title} path={`${d.name} / ${groupLabel}`} />
         <Suspense fallback={null}>
           <Highlighter targetId="note-body" />
         </Suspense>
