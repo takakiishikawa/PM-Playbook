@@ -108,7 +108,6 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .header-left { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: 8px; }
 .logo { display: flex; align-items: center; gap: 8px; color: var(--color-text); flex: 0 0 auto; }
 .logo:hover { text-decoration: none; }
-.logo-mark { width: 24px; height: 24px; border-radius: 6px; background: var(--color-background-brand-bold); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; }
 .logo-name { font-weight: 700; white-space: nowrap; }
 .menu-btn { white-space: nowrap; flex: 0 0 auto; height: 32px; display: flex; align-items: center; gap: 4px; padding: 0 8px 0 10px; border: none; border-radius: var(--radius-small); background: transparent; color: var(--color-text); font-size: 14px; font-weight: 400; }
 .menu-btn[aria-expanded="true"] { background: var(--color-background-neutral); color: var(--color-text); }
@@ -319,7 +318,6 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 /* ---------- login ---------- */
 .login-page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 24px; background: var(--elevation-surface-sunken); }
 .login-card { width: 100%; max-width: 400px; display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 40px 32px 32px; background: var(--elevation-surface); border: 1px solid var(--color-border); border-radius: 12px; box-shadow: 0px 1px 2px #1e1f2114, 0px 0px 1px #1e1f214f; text-align: center; }
-.login-logo { width: 48px; height: 48px; border-radius: 12px; background: var(--color-background-brand-bold); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; }
 .login-head { display: flex; flex-direction: column; gap: 8px; }
 .login-head h1 { margin: 0; font-size: 20px; line-height: 28px; font-weight: 700; letter-spacing: 0.02em; font-feature-settings: "palt"; }
 .login-head p { margin: 0; font-size: 14px; line-height: 22px; color: var(--color-text-subtle); }
@@ -393,3 +391,4 @@ mark.hit { background: var(--color-background-warning); color: inherit; font-wei
 .article h2[id="原則"] + ul > li { margin: 0; }
 .article h2[id="原則"] + ul > li + li { margin-top: 6px; }
 .article h2[id="原則"] + ul > li::marker { color: var(--color-link); }
+.logo svg, .login-card > svg { display: block; flex: 0 0 auto; }

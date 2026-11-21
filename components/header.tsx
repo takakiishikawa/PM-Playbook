@@ -6,6 +6,7 @@ import { DOMAINS, noteCount } from "@/content/structure";
 import { DomainMenu, type MenuDomain } from "./domain-menu";
 import { SearchTrigger } from "./search-trigger";
 import { Icon } from "./icon";
+import { LogoMark } from "./logo-mark";
 
 export type Crumb = { label: string; href?: string };
 
@@ -23,7 +24,7 @@ export function Header({ crumbs, showSearch = true, currentDomain, currentNote }
     <header className="header">
       <div className="header-left">
         <Link href="/" className="logo">
-          <span className="logo-mark">P</span>
+          <LogoMark size={24} />
           <span className="logo-name">PM Playbook</span>
         </Link>
         <DomainMenu domains={MENU} currentDomain={currentDomain} currentNote={currentNote} />

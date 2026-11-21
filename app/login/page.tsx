@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LoginButton } from "./login-button";
+import { LogoMark } from "@/components/logo-mark";
 
 export const metadata: Metadata = { title: "ログイン" };
 
@@ -12,9 +13,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
   return (
     <main className="login-page" id="main">
       <div className="login-card">
-        <span className="login-logo" aria-hidden="true">
-          P
-        </span>
+        <LogoMark size={56} />
         <div className="login-head">
           <h1>PM Playbook にログイン</h1>
           <p>許可されたアカウントだけが閲覧できます。</p>
