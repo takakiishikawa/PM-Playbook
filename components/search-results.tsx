@@ -26,6 +26,7 @@ export function toRows(result: SearchResult, term: string): ResultRow[] {
 export function SearchResultList({
   rows,
   noteCount,
+  label,
   selected,
   onHover,
   onPick,
@@ -33,6 +34,8 @@ export function SearchResultList({
 }: {
   rows: ResultRow[];
   noteCount: number;
+  /** 見出しを差し替える（最近開いたノートなど） */
+  label?: string;
   selected: number;
   onHover: (i: number) => void;
   onPick: () => void;
@@ -42,8 +45,9 @@ export function SearchResultList({
     <div className="results" ref={listRef} id="search-results" role="listbox" aria-label="検索結果">
       {rows.map((r, i) => (
         <div key={r.key} className="group">
-          {i === 0 && noteCount > 0 ? <div className="label" role="presentation">ノート</div> : null}
-          {i === noteCount ? <div className="label" role="presentation">テンプレート</div> : null}
+          {i === 0 && label ? <div className="label" role="presentation">{label}</div> : null}
+          {i === 0 && !label && noteCount > 0 ? <div className="label" role="presentation">ノート</div> : null}
+          {!label && i === noteCount ? <div className="label" role="presentation">テンプレート</div> : null}
           <Link
             id={rowId(i)}
             href={r.href}

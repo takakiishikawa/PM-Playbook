@@ -9,7 +9,9 @@ import { OPEN_SEARCH_EVENT } from "@/lib/search-events";
 import { announceOverlayOpen, trapTab, useCloseOnOtherOverlay } from "@/lib/overlay";
 import { Icon } from "./icon";
 import { DomainFilter } from "./domain-filter";
-import { SearchEmpty, SearchError, SearchResultList, rowId, toRows } from "./search-results";
+import { SearchEmpty, SearchError, SearchResultList, rowId, toRows, type ResultRow } from "./search-results";
+import ClockIcon from "@atlaskit/icon/core/clock";
+import { readRecent } from "./recent";
 
 /** ⌘K で開く検索のポップアップ。レイアウトに1つだけ置く */
 export function SearchDialog({ domains }: { domains: { slug: string; name: string }[] }) {
@@ -74,7 +76,13 @@ export function SearchDialog({ domains }: { domains: { slug: string; name: strin
   // 結果が変わったら先頭を選ぶ
   useEffect(() => setSel(0), [result]);
 
-  const rows = useMemo(() => toRows(result, term), [result, term]);
+  // 何も入力していないときは、最近開いたノートを出す（このブラウザだけの記録）
+  const [recent, setRecent] = useState<ResultRow[]>([]);
+  useEffect(() => {
+    if (open) setRecent(readRecent().map((v) => ({ key: `r:${v.id}`, href: `/n/${v.id}`, glyph: ClockIcon, title: v.title, path: v.path, snippet: null })));
+  }, [open]);
+  const showRecent = q.trim() === "" && recent.length > 0;
+  const rows = useMemo(() => (showRecent ? recent : toRows(result, term)), [showRecent, recent, result, term]);
 
   useEffect(() => {
     listRef.current?.querySelector<HTMLElement>('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
@@ -158,7 +166,7 @@ export function SearchDialog({ domains }: { domains: { slug: string; name: strin
         ) : settled && count === 0 ? (
           <SearchEmpty term={term} related={result.related} onPick={dismiss} />
         ) : count > 0 ? (
-          <SearchResultList rows={rows} noteCount={noteCount} selected={sel} onHover={setSel} onPick={dismiss} listRef={listRef} />
+          <SearchResultList rows={rows} noteCount={showRecent ? 0 : noteCount} label={showRecent ? "最近開いたノート" : undefined} selected={sel} onHover={setSel} onPick={dismiss} listRef={listRef} />
         ) : null}
 
         <div className="keys" aria-hidden="true">
